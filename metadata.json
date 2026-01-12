@@ -1,0 +1,15 @@
+{
+  "name": "OmniClip - 智慧懸浮筆記板",
+  "description": "跨裝置連動的懸浮側邊工具，具備 AI 摘要與雲端同步功能。",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ],
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/564/564445.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
