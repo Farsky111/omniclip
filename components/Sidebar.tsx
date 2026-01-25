@@ -1,6 +1,5 @@
-
 import React, { useState, useRef } from 'react';
-import { Snippet, ContentType } from '../types';
+import { Snippet, ContentType, Workspace } from '../types';
 import { analyzeSnippet } from '../services/geminiService';
 import SnippetCard from './SnippetCard';
 
@@ -10,7 +9,11 @@ interface SidebarProps {
   snippets: Snippet[];
   onAddSnippet: (snippet: Snippet) => void;
   onDeleteSnippet: (id: string) => void;
-  syncId: string;
+  workspaces: Workspace[];
+  activeWorkspaceId: string;
+  onSwitchWorkspace: (id: string) => void;
+  onAddWorkspace: (name: string) => void;
+  onDeleteWorkspace: (id: string) => void;
   onUpdateSyncId: (id: string) => void;
   onSyncFromCloud: (snippets: Snippet[]) => void;
 }
@@ -22,7 +25,8 @@ interface SidebarProps {
  */
 const Sidebar: React.FC<SidebarProps> = ({
   isOpen, onClose, snippets, onAddSnippet, onDeleteSnippet,
-  syncId, onUpdateSyncId, onSyncFromCloud
+  workspaces, activeWorkspaceId, onSwitchWorkspace,
+  onAddWorkspace, onDeleteWorkspace, onUpdateSyncId, onSyncFromCloud
 }) => {
   const [activeTab, setActiveTab] = useState<'list' | 'settings' | 'help'>('list');
   const [inputValue, setInputValue] = useState('');
@@ -30,7 +34,15 @@ const Sidebar: React.FC<SidebarProps> = ({
   const [statusMsg, setStatusMsg] = useState('');
   const [filter, setFilter] = useState<ContentType | 'all'>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [tempSyncId, setTempSyncId] = useState(syncId);
+
+  const activeWorkspace = workspaces.find(w => w.id === activeWorkspaceId);
+  const [tempSyncId, setTempSyncId] = useState(activeWorkspace?.syncId || '');
+  const [newWorkspaceName, setNewWorkspaceName] = useState('');
+
+  // 當切換工作區時更新 tempSyncId
+  React.useEffect(() => {
+    setTempSyncId(activeWorkspace?.syncId || '');
+  }, [activeWorkspaceId, activeWorkspace?.syncId]);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoInputRef = useRef<HTMLInputElement>(null);
@@ -165,7 +177,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <>
       {displayOpen && !isPopout && <div className="fixed inset-0 bg-black/20 backdrop-blur-[1px] z-40" onClick={onClose} />}
-      <div className={`fixed top-0 right-0 h-full bg-slate-50 z-50 shadow-2xl transition-transform duration-300 flex flex-col ${isPopout ? 'w-full translate-x-0' : 'w-full sm:w-96 ' + (isOpen ? 'translate-x-0' : 'translate-x-full')}`}>
+      <div className={`fixed top - 0 right - 0 h - full bg - slate - 50 z - 50 shadow - 2xl transition - transform duration - 300 flex flex - col ${isPopout ? 'w-full translate-x-0' : 'w-full sm:w-96 ' + (isOpen ? 'translate-x-0' : 'translate-x-full')} `}>
         <div className="bg-white border-b sticky top-0 z-10">
           <div className="p-3 flex items-center justify-between">
             <h2 className="text-sm font-black text-slate-800">OmniClip</h2>
@@ -179,8 +191,8 @@ const Sidebar: React.FC<SidebarProps> = ({
             </div>
           </div>
           <div className="flex border-t">
-            <button onClick={() => setActiveTab('list')} className={`flex-1 py-2 text-[11px] font-bold ${activeTab === 'list' ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-slate-400'}`}>列表</button>
-            <button onClick={() => setActiveTab('settings')} className={`flex-1 py-2 text-[11px] font-bold ${activeTab === 'settings' ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-slate-400'}`}>設定</button>
+            <button onClick={() => setActiveTab('list')} className={`flex - 1 py - 2 text - [11px] font - bold ${activeTab === 'list' ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-slate-400'} `}>列表</button>
+            <button onClick={() => setActiveTab('settings')} className={`flex - 1 py - 2 text - [11px] font - bold ${activeTab === 'settings' ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-slate-400'} `}>設定</button>
           </div>
         </div>
 
@@ -190,7 +202,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               <input type="text" placeholder="搜尋內容..." className="w-full px-3 py-1.5 bg-slate-100 rounded-lg text-xs" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
               <div className="flex gap-1 overflow-x-auto no-scrollbar pb-1">
                 {['all', 'text', 'url', 'image', 'video'].map((t) => (
-                  <button key={t} onClick={() => setFilter(t as any)} className={`px-3 py-1 text-[10px] rounded-full whitespace-nowrap ${filter === t ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-500'}`}>
+                  <button key={t} onClick={() => setFilter(t as any)} className={`px - 3 py - 1 text - [10px] rounded - full whitespace - nowrap ${filter === t ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-500'} `}>
                     {t === 'all' ? '全部' : t}
                   </button>
                 ))}
@@ -229,14 +241,58 @@ const Sidebar: React.FC<SidebarProps> = ({
         )}
 
         {activeTab === 'settings' && (
-          <div className="p-4 space-y-4">
-            <h3 className="text-xs font-bold text-slate-500 uppercase">同步與儲存</h3>
-            <div className="bg-indigo-50 p-3 rounded-lg border border-indigo-100">
-              <p className="text-[10px] text-indigo-700 mb-2 leading-relaxed">提示：採用本地 IndexedDB 儲存。大檔案（{'>'}5MB）僅在本地保存，較小筆記會自動同步至雲端金鑰。</p>
-            </div>
-            <input type="text" placeholder="輸入同步金鑰" className="w-full p-2 border rounded-lg text-xs" value={tempSyncId} onChange={(e) => setTempSyncId(e.target.value)} />
-            <button onClick={() => onUpdateSyncId(tempSyncId)} className="w-full py-2 bg-indigo-600 text-white rounded-lg text-xs font-bold">更新金鑰</button>
-            {syncId && <div className="text-[10px] text-emerald-600 text-center font-mono">目前金鑰: {syncId}</div>}
+          <div className="p-4 space-y-6 overflow-y-auto no-scrollbar">
+            <section className="space-y-3">
+              <h3 className="text-xs font-bold text-slate-500 uppercase flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                工作區管理 (隔離儲存)
+              </h3>
+              <div className="space-y-2">
+                {workspaces.map(ws => (
+                  <div key={ws.id} className={`flex items - center justify - between p - 2 rounded - lg border transition - colors ${ws.id === activeWorkspaceId ? 'bg-indigo-50 border-indigo-200' : 'bg-white border-slate-200'} `}>
+                    <button onClick={() => onSwitchWorkspace(ws.id)} className="flex-1 text-left text-xs font-medium truncate pr-2">
+                      {ws.name}
+                      {ws.id === activeWorkspaceId && <span className="ml-2 text-[9px] bg-indigo-600 text-white px-1.5 py-0.5 rounded">目前使用</span>}
+                    </button>
+                    {workspaces.length > 1 && (
+                      <button onClick={() => confirm(`確定要刪除「${ws.name}」索引嗎？(本地資料庫將保留但不再顯示)`) && onDeleteWorkspace(ws.id)} className="p-1 text-slate-400 hover:text-red-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="新工作區名稱"
+                  className="flex-1 p-2 bg-white border rounded-lg text-xs"
+                  value={newWorkspaceName}
+                  onChange={(e) => setNewWorkspaceName(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && newWorkspaceName.trim() && (onAddWorkspace(newWorkspaceName.trim()), setNewWorkspaceName(''))}
+                />
+                <button
+                  disabled={!newWorkspaceName.trim()}
+                  onClick={() => { onAddWorkspace(newWorkspaceName.trim()); setNewWorkspaceName(''); }}
+                  className="px-4 bg-indigo-600 text-white rounded-lg text-xs font-bold disabled:bg-slate-300"
+                >新增</button>
+              </div>
+            </section>
+
+            <section className="space-y-3 pt-4 border-t">
+              <h3 className="text-xs font-bold text-slate-500 uppercase flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m4-4l-4-4" /></svg>
+                同步金鑰 ({activeWorkspace?.name})
+              </h3>
+              <div className="bg-indigo-50 p-2.5 rounded-lg border border-indigo-100">
+                <p className="text-[10px] text-indigo-700 leading-relaxed">提示：每個工作區的資料與金鑰皆為獨立。切換後，OmniClip 將顯示對應設備的筆記。</p>
+              </div>
+              <div className="space-y-2">
+                <input type="text" placeholder="輸入同步金鑰" className="w-full p-2 bg-white border rounded-lg text-xs" value={tempSyncId} onChange={(e) => setTempSyncId(e.target.value)} />
+                <button onClick={() => onUpdateSyncId(tempSyncId)} className="w-full py-2 bg-indigo-600 text-white rounded-lg text-xs font-bold">更新金鑰</button>
+                {activeWorkspace?.syncId && <div className="text-[10px] text-emerald-600 text-center font-mono bg-emerald-50 py-1 rounded">目前金鑰: {activeWorkspace.syncId}</div>}
+              </div>
+            </section>
           </div>
         )}
       </div>

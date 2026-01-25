@@ -1,6 +1,12 @@
 
 export type ContentType = 'text' | 'url' | 'image' | 'video';
 
+export interface Workspace {
+  id: string;
+  name: string;
+  syncId: string;
+}
+
 export interface Snippet {
   id: string;
   type: ContentType;
