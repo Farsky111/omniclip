@@ -8,6 +8,11 @@ import { saveSnippetsToDB, loadSnippetsFromDB } from './services/dbService';
 
 const SYNC_ID_KEY = 'omniclip_sync_id';
 
+/**
+ * OmniClip 主程式組件
+ * 負責協調側邊欄、懸浮按鈕、本地儲存 (IndexedDB) 與雲端同步邏輯。
+ * 支援「迷你模式」用於側邊工具列顯示。
+ */
 const App: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [snippets, setSnippets] = useState<Snippet[]>([]);

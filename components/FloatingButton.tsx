@@ -7,13 +7,17 @@ interface FloatingButtonProps {
   itemCount: number;
 }
 
+/**
+ * 懸浮圓形按鈕組件
+ * 顯示於頁面右下角，用於切換側邊欄的展開與摺疊狀態。
+ * 包含未讀筆記數量的計數標籤。
+ */
 const FloatingButton: React.FC<FloatingButtonProps> = ({ isOpen, onClick, itemCount }) => {
   return (
     <button
       onClick={onClick}
-      className={`fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95 ${
-        isOpen ? 'bg-red-500 rotate-45' : 'bg-indigo-600'
-      }`}
+      className={`fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95 ${isOpen ? 'bg-red-500 rotate-45' : 'bg-indigo-600'
+        }`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

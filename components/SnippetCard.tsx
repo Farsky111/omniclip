@@ -8,10 +8,15 @@ interface SnippetCardProps {
   onCopy: (content: string) => void;
 }
 
+/**
+ * 筆記卡片組件
+ * 用於顯示單則筆記內容。根據內容類型 (文字、網址、圖片、影片) 顯示不同的預覽，
+ * 並提供下載、複製與刪除功能。
+ */
 const SnippetCard: React.FC<SnippetCardProps> = ({ snippet, onDelete, onCopy }) => {
   const isUrl = snippet.type === 'url' || (snippet.type === 'video' && !snippet.content.startsWith('data:'));
   const isDataFile = snippet.content.startsWith('data:');
-  
+
   const typeLabels: Record<string, string> = {
     'url': '網址',
     'image': '圖片',
@@ -19,9 +24,13 @@ const SnippetCard: React.FC<SnippetCardProps> = ({ snippet, onDelete, onCopy }) 
     'video': '影片'
   };
 
+  /**
+   * 處理檔案下載
+   * 建立臨時下載連結，讓使用者將筆記中的多媒體內容儲存至本地。
+   */
   const handleDownload = () => {
     if (!isDataFile && !isUrl) return;
-    
+
     const link = document.createElement('a');
     link.href = snippet.content;
     const extension = snippet.type === 'image' ? 'png' : (snippet.type === 'video' ? 'mp4' : 'txt');
@@ -31,6 +40,12 @@ const SnippetCard: React.FC<SnippetCardProps> = ({ snippet, onDelete, onCopy }) 
     document.body.removeChild(link);
   };
 
+  /**
+   * 渲染影片播放器
+   * 支援 YouTube 嵌入式播放器或 HTML5 原生播放器 (針對 Data URL 或影片連結)。
+   * @param {string} content 影片連結或數據
+   * @returns {JSX.Element} 播放器組件
+   */
   const renderVideo = (content: string) => {
     // 檢查是否為 YouTube 連結
     const ytMatch = content.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
@@ -47,12 +62,12 @@ const SnippetCard: React.FC<SnippetCardProps> = ({ snippet, onDelete, onCopy }) 
         </div>
       );
     }
-    
+
     // 直接使用 video src 播放 Data URL 或 MP4 連結
     return (
       <div className="mt-2 rounded-lg overflow-hidden bg-black aspect-video flex items-center justify-center">
-        <video 
-          controls 
+        <video
+          controls
           className="w-full h-full"
           src={content}
           preload="metadata"
@@ -66,19 +81,18 @@ const SnippetCard: React.FC<SnippetCardProps> = ({ snippet, onDelete, onCopy }) 
   return (
     <div className="group relative bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-200 mb-3 overflow-hidden">
       <div className="flex justify-between items-start mb-2">
-        <span className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-md ${
-          snippet.type === 'url' ? 'bg-blue-100 text-blue-700' :
-          snippet.type === 'image' ? 'bg-purple-100 text-purple-700' :
-          snippet.type === 'video' ? 'bg-amber-100 text-amber-700' :
-          'bg-emerald-100 text-emerald-700'
-        }`}>
+        <span className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-md ${snippet.type === 'url' ? 'bg-blue-100 text-blue-700' :
+            snippet.type === 'image' ? 'bg-purple-100 text-purple-700' :
+              snippet.type === 'video' ? 'bg-amber-100 text-amber-700' :
+                'bg-emerald-100 text-emerald-700'
+          }`}>
           {typeLabels[snippet.type] || snippet.type}
         </span>
         <div className="flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
           {(isDataFile || isUrl) && (
-             <button onClick={handleDownload} className="p-1 hover:bg-emerald-50 rounded text-emerald-500" title="下載檔案">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-             </button>
+            <button onClick={handleDownload} className="p-1 hover:bg-emerald-50 rounded text-emerald-500" title="下載檔案">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+            </button>
           )}
           <button onClick={() => onCopy(snippet.content)} className="p-1 hover:bg-slate-100 rounded text-slate-500" title="複製內容">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
@@ -93,7 +107,7 @@ const SnippetCard: React.FC<SnippetCardProps> = ({ snippet, onDelete, onCopy }) 
 
       {snippet.type === 'image' ? (
         <div className="mt-2 rounded-lg overflow-hidden bg-slate-100 aspect-video">
-           <img src={snippet.content} alt="Clipped" className="w-full h-full object-cover" />
+          <img src={snippet.content} alt="Clipped" className="w-full h-full object-cover" />
         </div>
       ) : snippet.type === 'video' ? (
         renderVideo(snippet.content)
@@ -105,7 +119,7 @@ const SnippetCard: React.FC<SnippetCardProps> = ({ snippet, onDelete, onCopy }) 
 
       {snippet.summary && (
         <div className="mt-2 bg-slate-50 p-2 rounded-md border-l-2 border-indigo-400">
-           <p className="text-[11px] text-slate-500 italic">AI 摘要：{snippet.summary}</p>
+          <p className="text-[11px] text-slate-500 italic">AI 摘要：{snippet.summary}</p>
         </div>
       )}
 
@@ -114,7 +128,7 @@ const SnippetCard: React.FC<SnippetCardProps> = ({ snippet, onDelete, onCopy }) 
           {snippet.tags.map((tag, idx) => <span key={idx} className="text-[9px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded-full">#{tag}</span>)}
         </div>
       )}
-      
+
       <div className="mt-2 text-[9px] text-slate-400 text-right">{new Date(snippet.timestamp).toLocaleString('zh-TW')}</div>
     </div>
   );

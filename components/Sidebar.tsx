@@ -15,9 +15,14 @@ interface SidebarProps {
   onSyncFromCloud: (snippets: Snippet[]) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ 
-  isOpen, onClose, snippets, onAddSnippet, onDeleteSnippet, 
-  syncId, onUpdateSyncId, onSyncFromCloud 
+/**
+ * 側邊欄組件
+ * OmniClip 的主要互動區域。包含筆記列表、內容過濾、搜尋、
+ * 檔案上傳 (圖片/影片) 以及雲端同步設定與同步按鈕。
+ */
+const Sidebar: React.FC<SidebarProps> = ({
+  isOpen, onClose, snippets, onAddSnippet, onDeleteSnippet,
+  syncId, onUpdateSyncId, onSyncFromCloud
 }) => {
   const [activeTab, setActiveTab] = useState<'list' | 'settings' | 'help'>('list');
   const [inputValue, setInputValue] = useState('');
@@ -26,11 +31,17 @@ const Sidebar: React.FC<SidebarProps> = ({
   const [filter, setFilter] = useState<ContentType | 'all'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [tempSyncId, setTempSyncId] = useState(syncId);
-  
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoInputRef = useRef<HTMLInputElement>(null);
   const isPopout = new URLSearchParams(window.location.search).get('mode') === 'mini';
 
+  /**
+   * 壓縮圖片檔案
+   * 將原始 Base64 圖片縮放並降低品質以減少存儲空間佔用。
+   * @param {string} base64 原始圖片數據
+   * @returns {Promise<string>} 壓縮後的 Base64 數據
+   */
   const compressImage = (base64: string): Promise<string> => {
     return new Promise((resolve) => {
       const img = new Image();
@@ -39,14 +50,14 @@ const Sidebar: React.FC<SidebarProps> = ({
         const canvas = document.createElement('canvas');
         let width = img.width;
         let height = img.height;
-        
+
         // 限制最大寬度為 1600px
         const MAX_WIDTH = 1600;
         if (width > MAX_WIDTH) {
           height = (MAX_WIDTH / width) * height;
           width = MAX_WIDTH;
         }
-        
+
         canvas.width = width;
         canvas.height = height;
         const ctx = canvas.getContext('2d');
@@ -57,6 +68,12 @@ const Sidebar: React.FC<SidebarProps> = ({
     });
   };
 
+  /**
+   * 處理上傳的檔案 (圖片或影片)
+   * 讀取檔案、進行必要的優化處理，並透過 AI 生成摘要後存入筆記。
+   * @param {File} file 檔案物件
+   * @param {ContentType} type 檔案類型
+   */
   const processFile = async (file: File, type: ContentType) => {
     // 雖然 IndexedDB 可以存很大，但為了同步效率，建議影片在 30MB 內
     const MAX_VIDEO_SIZE = 30 * 1024 * 1024;
@@ -67,19 +84,19 @@ const Sidebar: React.FC<SidebarProps> = ({
 
     setIsAnalyzing(true);
     setStatusMsg(type === 'image' ? "正在優化圖片..." : "正在讀取影片...");
-    
+
     const reader = new FileReader();
     reader.onload = async (e) => {
       try {
         let content = e.target?.result as string;
-        
+
         if (type === 'image') {
           content = await compressImage(content);
         }
 
         setStatusMsg("AI 分析內容中...");
         const analysis = await analyzeSnippet(content, type);
-        
+
         const newSnippet: Snippet = {
           id: crypto.randomUUID(),
           type,
@@ -89,7 +106,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           tags: [...analysis.tags],
           timestamp: Date.now(),
         };
-        
+
         onAddSnippet(newSnippet);
       } catch (err) {
         console.error(err);
@@ -102,13 +119,17 @@ const Sidebar: React.FC<SidebarProps> = ({
     reader.readAsDataURL(file);
   };
 
+  /**
+   * 處理手動輸入的內容 (文字或網址)
+   * 自動判斷內容類型，並透過 AI 服務進行分析後加入筆記列表。
+   */
   const handleAdd = async () => {
     if (!inputValue.trim()) return;
     setIsAnalyzing(true);
     setStatusMsg("AI 正在解析...");
     const content = inputValue.trim();
     setInputValue('');
-    
+
     try {
       let type: ContentType = 'text';
       if (content.startsWith('http')) {
@@ -134,8 +155,8 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   const filteredSnippets = snippets.filter(s => {
     const matchesFilter = filter === 'all' || s.type === filter;
-    const matchesSearch = s.content.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          (s.title?.toLowerCase() || '').includes(searchQuery.toLowerCase());
+    const matchesSearch = s.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (s.title?.toLowerCase() || '').includes(searchQuery.toLowerCase());
     return matchesFilter && matchesSearch;
   });
 
@@ -208,15 +229,15 @@ const Sidebar: React.FC<SidebarProps> = ({
         )}
 
         {activeTab === 'settings' && (
-           <div className="p-4 space-y-4">
-             <h3 className="text-xs font-bold text-slate-500 uppercase">同步與儲存</h3>
-             <div className="bg-indigo-50 p-3 rounded-lg border border-indigo-100">
-                <p className="text-[10px] text-indigo-700 mb-2 leading-relaxed">提示：採用本地 IndexedDB 儲存。大檔案（>5MB）僅在本地保存，較小筆記會自動同步至雲端金鑰。</p>
-             </div>
-             <input type="text" placeholder="輸入同步金鑰" className="w-full p-2 border rounded-lg text-xs" value={tempSyncId} onChange={(e) => setTempSyncId(e.target.value)} />
-             <button onClick={() => onUpdateSyncId(tempSyncId)} className="w-full py-2 bg-indigo-600 text-white rounded-lg text-xs font-bold">更新金鑰</button>
-             {syncId && <div className="text-[10px] text-emerald-600 text-center font-mono">目前金鑰: {syncId}</div>}
-           </div>
+          <div className="p-4 space-y-4">
+            <h3 className="text-xs font-bold text-slate-500 uppercase">同步與儲存</h3>
+            <div className="bg-indigo-50 p-3 rounded-lg border border-indigo-100">
+              <p className="text-[10px] text-indigo-700 mb-2 leading-relaxed">提示：採用本地 IndexedDB 儲存。大檔案（{'>'}5MB）僅在本地保存，較小筆記會自動同步至雲端金鑰。</p>
+            </div>
+            <input type="text" placeholder="輸入同步金鑰" className="w-full p-2 border rounded-lg text-xs" value={tempSyncId} onChange={(e) => setTempSyncId(e.target.value)} />
+            <button onClick={() => onUpdateSyncId(tempSyncId)} className="w-full py-2 bg-indigo-600 text-white rounded-lg text-xs font-bold">更新金鑰</button>
+            {syncId && <div className="text-[10px] text-emerald-600 text-center font-mono">目前金鑰: {syncId}</div>}
+          </div>
         )}
       </div>
     </>
