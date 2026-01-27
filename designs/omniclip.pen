@@ -3,16 +3,2252 @@
   "children": [
     {
       "type": "frame",
-      "id": "bi8Au",
-      "x": 0,
-      "y": 0,
-      "name": "Frame",
-      "reusable": true,
+      "id": "I1NWi",
+      "x": -638,
+      "y": -758,
+      "name": "OmniClip Desktop",
       "clip": true,
-      "width": 800,
-      "height": 600,
-      "fill": "#FFFFFF",
-      "layout": "none"
+      "width": 1440,
+      "height": 1080,
+      "fill": "#F5F4F1",
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "eoJGN",
+          "x": -120,
+          "y": -140,
+          "name": "Bg Glow 1",
+          "fill": "#C8F0D840",
+          "width": 520,
+          "height": 520
+        },
+        {
+          "type": "ellipse",
+          "id": "dRYPt",
+          "x": 920,
+          "y": 180,
+          "name": "Bg Glow 2",
+          "fill": "#D8957540",
+          "width": 640,
+          "height": 640
+        },
+        {
+          "type": "frame",
+          "id": "MqKmP",
+          "x": 1040,
+          "y": 140,
+          "name": "Workspace Dropdown - Desktop",
+          "width": 360,
+          "fill": "#FFFFFF",
+          "cornerRadius": 16,
+          "layout": "vertical",
+          "gap": 8,
+          "padding": 12,
+          "children": [
+            {
+              "type": "text",
+              "id": "U1ujK",
+              "name": "dropTitle",
+              "fill": "#1A1918",
+              "content": "切換工作區",
+              "fontFamily": "Outfit",
+              "fontSize": 12,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "wfMVg",
+              "name": "dropItem1",
+              "width": "fill_container",
+              "fill": "#F5F4F1",
+              "cornerRadius": 12,
+              "padding": [
+                8,
+                10
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "6WHD9",
+                  "name": "dropItem1Text",
+                  "fill": "#1A1918",
+                  "content": "預設工作區",
+                  "fontFamily": "Outfit",
+                  "fontSize": 11,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "biRNm",
+                  "name": "dropItem1Badge",
+                  "fill": "#C8F0D8",
+                  "cornerRadius": 100,
+                  "padding": [
+                    2,
+                    6
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "48Pfz",
+                      "name": "dropItem1BadgeText",
+                      "fill": "#3D8A5A",
+                      "content": "使用中",
+                      "fontFamily": "Outfit",
+                      "fontSize": 9,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "SrN7u",
+              "name": "dropItem2",
+              "width": "fill_container",
+              "fill": "#FFFFFF",
+              "cornerRadius": 12,
+              "padding": [
+                8,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "GoWXK",
+                  "name": "dropItem2Text",
+                  "fill": "#1A1918",
+                  "content": "行銷素材",
+                  "fontFamily": "Outfit",
+                  "fontSize": 11,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ZF1c5",
+              "name": "dropItem3",
+              "width": "fill_container",
+              "fill": "#FFFFFF",
+              "cornerRadius": 12,
+              "padding": [
+                8,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "EgW3c",
+                  "name": "dropItem3Text",
+                  "fill": "#1A1918",
+                  "content": "團隊共享",
+                  "fontFamily": "Outfit",
+                  "fontSize": 11,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "sNWoq",
+              "name": "dropAction",
+              "width": "fill_container",
+              "padding": [
+                6,
+                8
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "nk2ST",
+                  "name": "dropActionText",
+                  "fill": "#3D8A5A",
+                  "content": "新增工作區",
+                  "fontFamily": "Outfit",
+                  "fontSize": 11,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "icon_font",
+                  "id": "CIpH2",
+                  "name": "dropActionIcon",
+                  "width": 12,
+                  "height": 12,
+                  "iconFontName": "plus",
+                  "iconFontFamily": "lucide",
+                  "fill": "#3D8A5A"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "3IwWo",
+          "x": 0,
+          "y": 0,
+          "name": "Desktop Content",
+          "width": 1440,
+          "height": 1080,
+          "layout": "vertical",
+          "gap": 48,
+          "padding": [
+            80,
+            96
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "vSxoS",
+              "name": "Header",
+              "width": "fill_container",
+              "height": 64,
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "1Dt2U",
+                  "name": "logo",
+                  "fill": "#1A1918",
+                  "content": "OmniClip",
+                  "fontFamily": "Outfit",
+                  "fontSize": 20,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "XFqMQ",
+                  "name": "Nav",
+                  "gap": 24,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "TaTmV",
+                      "name": "nav1",
+                      "fill": "#6D6C6A",
+                      "content": "功能",
+                      "fontFamily": "Outfit",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "7vc81",
+                      "name": "nav2",
+                      "fill": "#6D6C6A",
+                      "content": "同步",
+                      "fontFamily": "Outfit",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "rUghj",
+                      "name": "nav3",
+                      "fill": "#6D6C6A",
+                      "content": "工作區",
+                      "fontFamily": "Outfit",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "XVSj5",
+                  "name": "Header Actions",
+                  "gap": 12,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "GpU9z",
+                      "name": "Header CTA",
+                      "fill": "#3D8A5A",
+                      "cornerRadius": 12,
+                      "padding": [
+                        10,
+                        18
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "mi1Wo",
+                          "name": "headerBtnText",
+                          "fill": "#FFFFFF",
+                          "content": "開啟筆記板",
+                          "fontFamily": "Outfit",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "FHgnP",
+              "name": "Hero",
+              "width": "fill_container",
+              "gap": 48,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "HD8co",
+                  "name": "Hero Copy",
+                  "width": 560,
+                  "layout": "vertical",
+                  "gap": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Qalpb",
+                      "name": "heroEyebrow",
+                      "fill": "#3D8A5A",
+                      "content": "智慧懸浮筆記板",
+                      "fontFamily": "Outfit",
+                      "fontSize": 12,
+                      "fontWeight": "600",
+                      "letterSpacing": 0.6
+                    },
+                    {
+                      "type": "text",
+                      "id": "MtPEI",
+                      "name": "heroTitle",
+                      "fill": "#1A1918",
+                      "content": "一鍵收納文字、圖片、影片，跨裝置即時同步",
+                      "fontFamily": "Outfit",
+                      "fontSize": 38,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "92crd",
+                      "name": "heroBody",
+                      "fill": "#6D6C6A",
+                      "content": "OmniClip 讓你在任何網頁快速擷取與整理，AI 自動摘要與標籤，工作區隔離管理。",
+                      "fontFamily": "Outfit",
+                      "fontSize": 16
+                    },
+                    {
+                      "type": "frame",
+                      "id": "g3W4R",
+                      "name": "Hero List",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "oq8Nu",
+                          "name": "list1",
+                          "fill": "#6D6C6A",
+                          "content": "• 支援大型檔案與本地 IndexedDB 儲存",
+                          "fontFamily": "Outfit",
+                          "fontSize": 13
+                        },
+                        {
+                          "type": "text",
+                          "id": "9bQiW",
+                          "name": "list2",
+                          "fill": "#6D6C6A",
+                          "content": "• 30 秒雲端同步與版本合併",
+                          "fontFamily": "Outfit",
+                          "fontSize": 13
+                        },
+                        {
+                          "type": "text",
+                          "id": "5jPJt",
+                          "name": "list3",
+                          "fill": "#6D6C6A",
+                          "content": "• 多工作區切換，資料互不干擾",
+                          "fontFamily": "Outfit",
+                          "fontSize": 13
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "2MV9a",
+                      "name": "Hero Actions",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Apw20",
+                          "name": "Primary CTA",
+                          "fill": "#3D8A5A",
+                          "cornerRadius": 12,
+                          "padding": [
+                            12,
+                            20
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "sqAY6",
+                              "name": "heroPrimaryText",
+                              "fill": "#FFFFFF",
+                              "content": "立即使用",
+                              "fontFamily": "Outfit",
+                              "fontSize": 14,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ZfS58",
+                          "name": "Secondary CTA",
+                          "fill": "#FAFAF8",
+                          "cornerRadius": 12,
+                          "padding": [
+                            12,
+                            20
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "SlKJX",
+                              "name": "heroSecondaryText",
+                              "fill": "#3D8A5A",
+                              "content": "查看功能",
+                              "fontFamily": "Outfit",
+                              "fontSize": 14,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "4fNIq",
+                  "name": "Preview Card",
+                  "width": 520,
+                  "height": 560,
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "mSME1",
+                      "name": "Preview Header",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "7wJXz",
+                          "name": "previewTitle",
+                          "fill": "#1A1918",
+                          "content": "側邊筆記板",
+                          "fontFamily": "Outfit",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "bYvKz",
+                          "name": "Sync Badge",
+                          "fill": "#C8F0D8",
+                          "cornerRadius": 100,
+                          "padding": [
+                            4,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "e4ddP",
+                              "name": "previewBadgeText",
+                              "fill": "#3D8A5A",
+                              "content": "同步中",
+                              "fontFamily": "Outfit",
+                              "fontSize": 10,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "cSspQ",
+                      "name": "Workspace Switcher",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "6ZwU0",
+                          "name": "workspaceLabel",
+                          "fill": "#6D6C6A",
+                          "content": "目前工作區",
+                          "fontFamily": "Outfit",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "3ubtr",
+                          "name": "workspacePill",
+                          "fill": "#EDECEA",
+                          "cornerRadius": 100,
+                          "padding": [
+                            4,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "b4Zzx",
+                              "name": "workspacePillText",
+                              "fill": "#1A1918",
+                              "content": "預設工作區",
+                              "fontFamily": "Outfit",
+                              "fontSize": 10,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "4OZNH",
+                          "name": "workspaceManage",
+                          "fill": "#3D8A5A",
+                          "content": "管理",
+                          "fontFamily": "Outfit",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "lpJcF",
+                      "name": "Workspace Dropdown",
+                      "enabled": false,
+                      "width": "fill_container",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 12,
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "kJtJc",
+                          "name": "wsItem1",
+                          "width": "fill_container",
+                          "fill": "#F5F4F1",
+                          "cornerRadius": 10,
+                          "padding": [
+                            6,
+                            8
+                          ],
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "uboqi",
+                              "name": "wsItem1Text",
+                              "fill": "#1A1918",
+                              "content": "預設工作區",
+                              "fontFamily": "Outfit",
+                              "fontSize": 11,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "BOg5B",
+                              "name": "wsItem1Badge",
+                              "fill": "#C8F0D8",
+                              "cornerRadius": 100,
+                              "padding": [
+                                2,
+                                6
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "cx1uW",
+                                  "name": "wsItem1BadgeText",
+                                  "fill": "#3D8A5A",
+                                  "content": "使用中",
+                                  "fontFamily": "Outfit",
+                                  "fontSize": 9,
+                                  "fontWeight": "600"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Z9TeO",
+                          "name": "wsItem2",
+                          "width": "fill_container",
+                          "fill": "#FFFFFF",
+                          "cornerRadius": 10,
+                          "padding": [
+                            6,
+                            8
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Njki0",
+                              "name": "wsItem2Text",
+                              "fill": "#1A1918",
+                              "content": "行銷素材",
+                              "fontFamily": "Outfit",
+                              "fontSize": 11,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "l4iHt",
+                          "name": "wsItem3",
+                          "width": "fill_container",
+                          "fill": "#FFFFFF",
+                          "cornerRadius": 10,
+                          "padding": [
+                            6,
+                            8
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "PDcpo",
+                              "name": "wsItem3Text",
+                              "fill": "#1A1918",
+                              "content": "團隊共享",
+                              "fontFamily": "Outfit",
+                              "fontSize": 11,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "bjlkd",
+                      "name": "Search",
+                      "width": "fill_container",
+                      "height": 44,
+                      "fill": "#F5F4F1",
+                      "cornerRadius": 12,
+                      "gap": 8,
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "ZJso8",
+                          "name": "searchIcon",
+                          "width": 16,
+                          "height": 16,
+                          "iconFontName": "search",
+                          "iconFontFamily": "lucide",
+                          "fill": "#9C9B99"
+                        },
+                        {
+                          "type": "text",
+                          "id": "eGQRz",
+                          "name": "searchText",
+                          "fill": "#9C9B99",
+                          "content": "搜尋內容...",
+                          "fontFamily": "Outfit",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "DJ0ZC",
+                      "name": "Filters",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "cWRg0",
+                          "name": "chipAll",
+                          "fill": "#3D8A5A",
+                          "cornerRadius": 100,
+                          "padding": [
+                            6,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "d3Z0R",
+                              "name": "chipAllText",
+                              "fill": "#FFFFFF",
+                              "content": "全部",
+                              "fontFamily": "Outfit",
+                              "fontSize": 10,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "DVOe4",
+                          "name": "chipText",
+                          "fill": "#EDECEA",
+                          "cornerRadius": 100,
+                          "padding": [
+                            6,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "K3W0k",
+                              "name": "chipTextText",
+                              "fill": "#6D6C6A",
+                              "content": "文字",
+                              "fontFamily": "Outfit",
+                              "fontSize": 10,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "LGNEa",
+                          "name": "chipImage",
+                          "fill": "#EDECEA",
+                          "cornerRadius": 100,
+                          "padding": [
+                            6,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "vB3jD",
+                              "name": "chipImageText",
+                              "fill": "#6D6C6A",
+                              "content": "圖片",
+                              "fontFamily": "Outfit",
+                              "fontSize": 10,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "cpBGT",
+                          "name": "chipVideo",
+                          "fill": "#EDECEA",
+                          "cornerRadius": 100,
+                          "padding": [
+                            6,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "LHDeQ",
+                              "name": "chipVideoText",
+                              "fill": "#6D6C6A",
+                              "content": "影片",
+                              "fontFamily": "Outfit",
+                              "fontSize": 10,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "O15HP",
+                      "name": "Snippet List",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u6AZU",
+                          "name": "desktopListLabel",
+                          "fill": "#6D6C6A",
+                          "content": "目前工作區內容",
+                          "fontFamily": "Outfit",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "HOOHx",
+                          "name": "Snippet Card",
+                          "width": "fill_container",
+                          "fill": "#FAFAF8",
+                          "cornerRadius": 12,
+                          "layout": "vertical",
+                          "gap": 6,
+                          "padding": 12,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "s7F44",
+                              "name": "card1Title",
+                              "fill": "#1A1918",
+                              "content": "會議紀錄｜工作區 A",
+                              "fontFamily": "Outfit",
+                              "fontSize": 12,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "text",
+                              "id": "XaN0H",
+                              "name": "card1Meta",
+                              "fill": "#6D6C6A",
+                              "content": "AI 摘要：待辦 3 項、重點 5 條",
+                              "fontFamily": "Outfit",
+                              "fontSize": 11
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "0htvW",
+                          "name": "Snippet Card",
+                          "width": "fill_container",
+                          "fill": "#FAFAF8",
+                          "cornerRadius": 12,
+                          "layout": "vertical",
+                          "gap": 6,
+                          "padding": 12,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "6fqLs",
+                              "name": "card2Title",
+                              "fill": "#1A1918",
+                              "content": "產品截圖｜圖片筆記",
+                              "fontFamily": "Outfit",
+                              "fontSize": 12,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "text",
+                              "id": "HhrqA",
+                              "name": "card2Meta",
+                              "fill": "#6D6C6A",
+                              "content": "AI 摘要：收錄於行銷素材",
+                              "fontFamily": "Outfit",
+                              "fontSize": 11
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "mGkht",
+                          "name": "Snippet Card",
+                          "width": "fill_container",
+                          "fill": "#FAFAF8",
+                          "cornerRadius": 12,
+                          "layout": "vertical",
+                          "gap": 6,
+                          "padding": 12,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "8O6W4",
+                              "name": "card3Title",
+                              "fill": "#1A1918",
+                              "content": "影片連結｜自動嵌入",
+                              "fontFamily": "Outfit",
+                              "fontSize": 12,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "text",
+                              "id": "AcF2O",
+                              "name": "card3Meta",
+                              "fill": "#6D6C6A",
+                              "content": "AI 摘要：會議重點與時間碼",
+                              "fontFamily": "Outfit",
+                              "fontSize": 11
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "BcyQe",
+                      "name": "Upload Buttons",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "jXRFV",
+                          "name": "uploadImage",
+                          "fill": "#FFFFFF",
+                          "cornerRadius": 10,
+                          "gap": 6,
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "l6cTf",
+                              "name": "uploadImageIcon",
+                              "width": 12,
+                              "height": 12,
+                              "iconFontName": "image",
+                              "iconFontFamily": "lucide",
+                              "fill": "#3D8A5A"
+                            },
+                            {
+                              "type": "text",
+                              "id": "l9soD",
+                              "name": "uploadImageText",
+                              "fill": "#3D8A5A",
+                              "content": "上傳圖片",
+                              "fontFamily": "Outfit",
+                              "fontSize": 11,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "CNQmM",
+                          "name": "uploadVideo",
+                          "fill": "#FFFFFF",
+                          "cornerRadius": 10,
+                          "gap": 6,
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "gO06F",
+                              "name": "uploadVideoIcon",
+                              "width": 12,
+                              "height": 12,
+                              "iconFontName": "video",
+                              "iconFontFamily": "lucide",
+                              "fill": "#D89575"
+                            },
+                            {
+                              "type": "text",
+                              "id": "suOw7",
+                              "name": "uploadVideoText",
+                              "fill": "#D89575",
+                              "content": "上傳影片",
+                              "fontFamily": "Outfit",
+                              "fontSize": 11,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "6dGc3",
+                      "name": "Quick Add",
+                      "width": "fill_container",
+                      "fill": "#F5F4F1",
+                      "cornerRadius": 12,
+                      "gap": 8,
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "rliVf",
+                          "name": "quickIcon",
+                          "width": 14,
+                          "height": 14,
+                          "iconFontName": "plus",
+                          "iconFontFamily": "lucide",
+                          "fill": "#9C9B99"
+                        },
+                        {
+                          "type": "text",
+                          "id": "o6eJM",
+                          "name": "quickText",
+                          "fill": "#9C9B99",
+                          "content": "貼上文字或網址...",
+                          "fontFamily": "Outfit",
+                          "fontSize": 11,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "3ZKRt",
+                          "name": "Quick Badge",
+                          "fill": "#FFFFFF",
+                          "cornerRadius": 100,
+                          "padding": [
+                            4,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "tBiTH",
+                              "name": "quickBadgeText",
+                              "fill": "#3D8A5A",
+                              "content": "儲存",
+                              "fontFamily": "Outfit",
+                              "fontSize": 10,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "1jNY3",
+                          "name": "quickTarget",
+                          "fill": "#FFFFFF",
+                          "cornerRadius": 100,
+                          "padding": [
+                            4,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Imqbf",
+                              "name": "quickTargetText",
+                              "fill": "#6D6C6A",
+                              "content": "上傳至：預設工作區",
+                              "fontFamily": "Outfit",
+                              "fontSize": 10,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "O6t1P",
+                      "name": "Sync Key",
+                      "width": "fill_container",
+                      "fill": "#FAFAF8",
+                      "cornerRadius": 12,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "yBPDk",
+                          "name": "syncTitle",
+                          "fill": "#1A1918",
+                          "content": "工作區同步金鑰",
+                          "fontFamily": "Outfit",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "MF9jC",
+                          "name": "syncNote",
+                          "fill": "#9C9B99",
+                          "content": "一次設定，永久同步",
+                          "fontFamily": "Outfit",
+                          "fontSize": 10,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "wWdaU",
+                          "name": "Key Input",
+                          "width": "fill_container",
+                          "height": 36,
+                          "fill": "#FFFFFF",
+                          "cornerRadius": 10,
+                          "gap": 6,
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "DdwOc",
+                              "name": "syncInputText",
+                              "fill": "#9C9B99",
+                              "content": "輸入同步金鑰…",
+                              "fontFamily": "Outfit",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "qtORt",
+                          "name": "Update Key",
+                          "fill": "#3D8A5A",
+                          "cornerRadius": 10,
+                          "padding": [
+                            8,
+                            12
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "zqjwF",
+                              "name": "syncButtonText",
+                              "fill": "#FFFFFF",
+                              "content": "更新金鑰",
+                              "fontFamily": "Outfit",
+                              "fontSize": 11,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "JOTZ9",
+              "fill": "#CCCCCC",
+              "width": 205,
+              "height": 83
+            },
+            {
+              "type": "frame",
+              "id": "xsl0K",
+              "name": "Features",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "2JKts",
+                  "name": "Features Header",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "E1wFL",
+                      "name": "featuresTitle",
+                      "fill": "#1A1918",
+                      "content": "為什麼選 OmniClip",
+                      "fontFamily": "Outfit",
+                      "fontSize": 18,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "rIzWL",
+                      "name": "featuresMeta",
+                      "fill": "#6D6C6A",
+                      "content": "跨裝置 · AI 摘要 · 懸浮擷取",
+                      "fontFamily": "Outfit",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "5LH7a",
+                  "name": "Feature Cards",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "r0F9G",
+                      "name": "Feature Card",
+                      "width": "fill_container",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 16,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "jmWxU",
+                          "name": "feature1Title",
+                          "fill": "#1A1918",
+                          "content": "懸浮側邊欄",
+                          "fontFamily": "Outfit",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "U754E",
+                          "name": "feature1Body",
+                          "fill": "#6D6C6A",
+                          "content": "不打斷工作流，隨時收納與整理。",
+                          "fontFamily": "Outfit",
+                          "fontSize": 12
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "F1jrQ",
+                      "name": "Feature Card",
+                      "width": "fill_container",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 16,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Ze2Aj",
+                          "name": "feature2Title",
+                          "fill": "#1A1918",
+                          "content": "智慧摘要標籤",
+                          "fontFamily": "Outfit",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "o5KdJ",
+                          "name": "feature2Body",
+                          "fill": "#6D6C6A",
+                          "content": "Gemini 自動整理重點與分類。",
+                          "fontFamily": "Outfit",
+                          "fontSize": 12
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "S0xyQ",
+                      "name": "Feature Card",
+                      "width": "fill_container",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 16,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "aPyKY",
+                          "name": "feature3Title",
+                          "fill": "#1A1918",
+                          "content": "工作區隔離",
+                          "fontFamily": "Outfit",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "hMMcw",
+                          "name": "feature3Body",
+                          "fill": "#6D6C6A",
+                          "content": "每個專案獨立資料與同步金鑰。",
+                          "fontFamily": "Outfit",
+                          "fontSize": 12
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "koJPF",
+      "x": -5,
+      "y": 468,
+      "name": "OmniClip Mobile",
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "#F5F4F1",
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "Zo4ja",
+          "x": -60,
+          "y": -70,
+          "name": "Bg Glow 1",
+          "fill": "#C8F0D840",
+          "width": 260,
+          "height": 260
+        },
+        {
+          "type": "frame",
+          "id": "mPUne",
+          "x": 60,
+          "y": 300,
+          "name": "Workspace Dropdown - Mobile",
+          "width": 240,
+          "fill": "#FFFFFF",
+          "cornerRadius": 14,
+          "layout": "vertical",
+          "gap": 6,
+          "padding": 10,
+          "children": [
+            {
+              "type": "text",
+              "id": "Ww2Eh",
+              "name": "mdTitle",
+              "fill": "#1A1918",
+              "content": "切換工作區",
+              "fontFamily": "Outfit",
+              "fontSize": 11,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "tXOZx",
+              "name": "mdItem1",
+              "width": "fill_container",
+              "fill": "#F5F4F1",
+              "cornerRadius": 10,
+              "padding": [
+                6,
+                8
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "rAQIY",
+                  "name": "mdItem1Text",
+                  "fill": "#1A1918",
+                  "content": "預設工作區",
+                  "fontFamily": "Outfit",
+                  "fontSize": 10,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "mrx1k",
+                  "name": "mdItem1Badge",
+                  "fill": "#C8F0D8",
+                  "cornerRadius": 100,
+                  "padding": [
+                    2,
+                    5
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "KYocl",
+                      "name": "mdItem1BadgeText",
+                      "fill": "#3D8A5A",
+                      "content": "使用中",
+                      "fontFamily": "Outfit",
+                      "fontSize": 8,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "zD1O9",
+              "name": "mdItem2",
+              "width": "fill_container",
+              "fill": "#FFFFFF",
+              "cornerRadius": 10,
+              "padding": [
+                6,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "AvyI2",
+                  "name": "mdItem2Text",
+                  "fill": "#1A1918",
+                  "content": "行銷素材",
+                  "fontFamily": "Outfit",
+                  "fontSize": 10,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "NO3cD",
+              "name": "mdItem3",
+              "width": "fill_container",
+              "fill": "#FFFFFF",
+              "cornerRadius": 10,
+              "padding": [
+                6,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "DCo4f",
+                  "name": "mdItem3Text",
+                  "fill": "#1A1918",
+                  "content": "團隊共享",
+                  "fontFamily": "Outfit",
+                  "fontSize": 10,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "D5OBx",
+              "name": "mdAction",
+              "width": "fill_container",
+              "padding": [
+                4,
+                6
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "n113K",
+                  "name": "mdActionText",
+                  "fill": "#3D8A5A",
+                  "content": "新增工作區",
+                  "fontFamily": "Outfit",
+                  "fontSize": 10,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "icon_font",
+                  "id": "bdXQ2",
+                  "name": "mdActionIcon",
+                  "width": 11,
+                  "height": 11,
+                  "iconFontName": "plus",
+                  "iconFontFamily": "lucide",
+                  "fill": "#3D8A5A"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ellipse",
+          "id": "f8XDi",
+          "x": 210,
+          "y": 340,
+          "name": "Bg Glow 2",
+          "fill": "#D8957540",
+          "width": 300,
+          "height": 300
+        },
+        {
+          "type": "frame",
+          "id": "b5pgg",
+          "x": 0,
+          "y": 0,
+          "name": "Mobile Content",
+          "width": 390,
+          "height": 844,
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            32,
+            24
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "mklnp",
+              "name": "Mobile Header",
+              "width": "fill_container",
+              "height": 44,
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "3AUlt",
+                  "name": "mobileLogo",
+                  "fill": "#1A1918",
+                  "content": "OmniClip",
+                  "fontFamily": "Outfit",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "GY55j",
+                  "name": "mobileBadge",
+                  "fill": "#C8F0D8",
+                  "cornerRadius": 100,
+                  "padding": [
+                    4,
+                    8
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "kSxSr",
+                      "name": "mobileBadgeText",
+                      "fill": "#3D8A5A",
+                      "content": "同步中",
+                      "fontFamily": "Outfit",
+                      "fontSize": 10,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "kIF3t",
+              "name": "Mobile Hero",
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "GZROU",
+                  "name": "heroTitleMobile",
+                  "fill": "#1A1918",
+                  "content": "把任何內容變成可搜尋的筆記",
+                  "fontFamily": "Outfit",
+                  "fontSize": 24,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "sArdZ",
+                  "name": "heroBodyMobile",
+                  "fill": "#6D6C6A",
+                  "content": "支援文字、圖片、影片與網址，AI 自動摘要並同步到每個裝置。",
+                  "fontFamily": "Outfit",
+                  "fontSize": 13
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "bHiYF",
+              "name": "Mobile CTA",
+              "fill": "#3D8A5A",
+              "cornerRadius": 12,
+              "padding": [
+                12,
+                16
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Ki4n9",
+                  "name": "mobileCtaText",
+                  "fill": "#FFFFFF",
+                  "content": "開啟懸浮筆記板",
+                  "fontFamily": "Outfit",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "pgrb6",
+              "name": "Mobile Preview",
+              "width": "fill_container",
+              "fill": "#FFFFFF",
+              "cornerRadius": 16,
+              "layout": "vertical",
+              "gap": 12,
+              "padding": 14,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "H8VZx",
+                  "name": "previewTitleRow",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "tecM3",
+                      "name": "previewTitleMobile",
+                      "fill": "#1A1918",
+                      "content": "側邊筆記板",
+                      "fontFamily": "Outfit",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "VQXAa",
+                      "name": "previewCount",
+                      "fill": "#EDECEA",
+                      "cornerRadius": 100,
+                      "padding": [
+                        4,
+                        8
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "GMtwi",
+                          "name": "previewCountText",
+                          "fill": "#6D6C6A",
+                          "content": "6 則",
+                          "fontFamily": "Outfit",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "jzTAZ",
+                  "name": "Workspace Switcher",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "MbVRj",
+                      "name": "mobileWorkspaceLabel",
+                      "fill": "#6D6C6A",
+                      "content": "工作區",
+                      "fontFamily": "Outfit",
+                      "fontSize": 10,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "EaPi3",
+                      "name": "mobileWorkspacePill",
+                      "fill": "#EDECEA",
+                      "cornerRadius": 100,
+                      "padding": [
+                        4,
+                        6
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "N1vPf",
+                          "name": "mobileWorkspacePillText",
+                          "fill": "#1A1918",
+                          "content": "預設工作區",
+                          "fontFamily": "Outfit",
+                          "fontSize": 9,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "cslvT",
+                      "name": "mobileWorkspaceManage",
+                      "fill": "#3D8A5A",
+                      "content": "管理",
+                      "fontFamily": "Outfit",
+                      "fontSize": 9,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "C9ui3",
+                  "name": "Workspace Dropdown",
+                  "enabled": false,
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 10,
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "HBINW",
+                      "name": "mobileWsItem1",
+                      "width": "fill_container",
+                      "fill": "#F5F4F1",
+                      "cornerRadius": 8,
+                      "padding": [
+                        4,
+                        6
+                      ],
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "zwqfF",
+                          "name": "mobileWsItem1Text",
+                          "fill": "#1A1918",
+                          "content": "預設工作區",
+                          "fontFamily": "Outfit",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "8Jj3o",
+                          "name": "mobileWsItem1Badge",
+                          "fill": "#C8F0D8",
+                          "cornerRadius": 100,
+                          "padding": [
+                            2,
+                            5
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "hHe31",
+                              "name": "mobileWsItem1BadgeText",
+                              "fill": "#3D8A5A",
+                              "content": "使用中",
+                              "fontFamily": "Outfit",
+                              "fontSize": 8,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "a1UNF",
+                      "name": "mobileWsItem2",
+                      "width": "fill_container",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 8,
+                      "padding": [
+                        4,
+                        6
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "cuoav",
+                          "name": "mobileWsItem2Text",
+                          "fill": "#1A1918",
+                          "content": "行銷素材",
+                          "fontFamily": "Outfit",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "SFk4P",
+                      "name": "mobileWsItem3",
+                      "width": "fill_container",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 8,
+                      "padding": [
+                        4,
+                        6
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "oslab",
+                          "name": "mobileWsItem3Text",
+                          "fill": "#1A1918",
+                          "content": "團隊共享",
+                          "fontFamily": "Outfit",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "9xSdZ",
+                  "name": "Search",
+                  "width": "fill_container",
+                  "height": 40,
+                  "fill": "#F5F4F1",
+                  "cornerRadius": 12,
+                  "gap": 6,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "MJjHw",
+                      "name": "searchIconMobile",
+                      "width": 14,
+                      "height": 14,
+                      "iconFontName": "search",
+                      "iconFontFamily": "lucide",
+                      "fill": "#9C9B99"
+                    },
+                    {
+                      "type": "text",
+                      "id": "NErfy",
+                      "name": "searchTextMobile",
+                      "fill": "#9C9B99",
+                      "content": "搜尋內容...",
+                      "fontFamily": "Outfit",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "GVQOZ",
+                  "name": "Snippet Card",
+                  "width": "fill_container",
+                  "fill": "#FAFAF8",
+                  "cornerRadius": 12,
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": 10,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "lqXKf",
+                      "name": "mobileListLabel",
+                      "fill": "#6D6C6A",
+                      "content": "目前工作區內容",
+                      "fontFamily": "Outfit",
+                      "fontSize": 9,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "TS3hl",
+                      "name": "snippetTitleMobile",
+                      "fill": "#1A1918",
+                      "content": "設計參考｜圖片筆記",
+                      "fontFamily": "Outfit",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "yCnug",
+                      "name": "snippetMetaMobile",
+                      "fill": "#6D6C6A",
+                      "content": "AI 摘要：整理為 3 個重點",
+                      "fontFamily": "Outfit",
+                      "fontSize": 10
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Y0ZYJ",
+                  "name": "Upload Buttons",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ydqCx",
+                      "name": "mobileUploadImage",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 10,
+                      "gap": 4,
+                      "padding": [
+                        6,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "u2Fdi",
+                          "name": "mobileUploadImageIcon",
+                          "width": 11,
+                          "height": 11,
+                          "iconFontName": "image",
+                          "iconFontFamily": "lucide",
+                          "fill": "#3D8A5A"
+                        },
+                        {
+                          "type": "text",
+                          "id": "iYzpg",
+                          "name": "mobileUploadImageText",
+                          "fill": "#3D8A5A",
+                          "content": "圖片",
+                          "fontFamily": "Outfit",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "GU23T",
+                      "name": "mobileUploadVideo",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 10,
+                      "gap": 4,
+                      "padding": [
+                        6,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "LlpBD",
+                          "name": "mobileUploadVideoIcon",
+                          "width": 11,
+                          "height": 11,
+                          "iconFontName": "video",
+                          "iconFontFamily": "lucide",
+                          "fill": "#D89575"
+                        },
+                        {
+                          "type": "text",
+                          "id": "A66nC",
+                          "name": "mobileUploadVideoText",
+                          "fill": "#D89575",
+                          "content": "影片",
+                          "fontFamily": "Outfit",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "iBJaC",
+                  "name": "Quick Add",
+                  "width": "fill_container",
+                  "fill": "#F5F4F1",
+                  "cornerRadius": 12,
+                  "gap": 6,
+                  "padding": [
+                    8,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "eCfhe",
+                      "name": "quickAddIconMobile",
+                      "width": 12,
+                      "height": 12,
+                      "iconFontName": "plus",
+                      "iconFontFamily": "lucide",
+                      "fill": "#9C9B99"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ltzFB",
+                      "name": "quickAddTextMobile",
+                      "fill": "#9C9B99",
+                      "content": "快速新增...",
+                      "fontFamily": "Outfit",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "qBI08",
+                      "name": "mobileQuickTarget",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 100,
+                      "padding": [
+                        3,
+                        6
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "nNuE8",
+                          "name": "mobileQuickTargetText",
+                          "fill": "#6D6C6A",
+                          "content": "上傳至：預設",
+                          "fontFamily": "Outfit",
+                          "fontSize": 9,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "1ImH6",
+                  "name": "Sync Key",
+                  "width": "fill_container",
+                  "fill": "#FAFAF8",
+                  "cornerRadius": 12,
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": 10,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "7mhtI",
+                      "name": "mobileSyncTitle",
+                      "fill": "#1A1918",
+                      "content": "同步金鑰",
+                      "fontFamily": "Outfit",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "pP1wc",
+                      "name": "mobileSyncNote",
+                      "fill": "#9C9B99",
+                      "content": "一次設定，永久同步",
+                      "fontFamily": "Outfit",
+                      "fontSize": 9,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ORsSx",
+                      "name": "Key Input",
+                      "width": "fill_container",
+                      "height": 32,
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 10,
+                      "gap": 6,
+                      "padding": [
+                        6,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Npvjl",
+                          "name": "mobileSyncInputText",
+                          "fill": "#9C9B99",
+                          "content": "輸入金鑰…",
+                          "fontFamily": "Outfit",
+                          "fontSize": 10,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "WCPyX",
+                      "name": "Update Key",
+                      "fill": "#3D8A5A",
+                      "cornerRadius": 10,
+                      "padding": [
+                        6,
+                        10
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "U498u",
+                          "name": "mobileSyncButtonText",
+                          "fill": "#FFFFFF",
+                          "content": "更新",
+                          "fontFamily": "Outfit",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "scH7X",
+              "name": "Mobile Features",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "4FcQF",
+                  "name": "mobileFeaturesTitle",
+                  "fill": "#1A1918",
+                  "content": "重點功能",
+                  "fontFamily": "Outfit",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "zJkLv",
+                  "name": "featRow1",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "wAfxe",
+                      "name": "featIcon1",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "layout-dashboard",
+                      "iconFontFamily": "lucide",
+                      "fill": "#3D8A5A"
+                    },
+                    {
+                      "type": "text",
+                      "id": "e2DnK",
+                      "name": "featText1",
+                      "fill": "#6D6C6A",
+                      "content": "懸浮側邊欄與即時剪貼",
+                      "fontFamily": "Outfit",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "aSOhD",
+                  "name": "featRow2",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "4GNvP",
+                      "name": "featIcon2",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "sparkles",
+                      "iconFontFamily": "lucide",
+                      "fill": "#D89575"
+                    },
+                    {
+                      "type": "text",
+                      "id": "cG8CO",
+                      "name": "featText2",
+                      "fill": "#6D6C6A",
+                      "content": "AI 摘要、自動標籤與分類",
+                      "fontFamily": "Outfit",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "PhDzY",
+                  "name": "featRow3",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "Epu5Q",
+                      "name": "featIcon3",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "cloud",
+                      "iconFontFamily": "lucide",
+                      "fill": "#3D8A5A"
+                    },
+                    {
+                      "type": "text",
+                      "id": "0jCci",
+                      "name": "featText3",
+                      "fill": "#6D6C6A",
+                      "content": "多工作區同步與隔離",
+                      "fontFamily": "Outfit",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
