@@ -2,7 +2,12 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { AIAnalysis } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY as string | undefined;
+
+const getClient = () => {
+  if (!apiKey) return null;
+  return new GoogleGenAI({ apiKey });
+};
 
 /**
  * 使用 Google Gemini AI 分析筆記內容
@@ -13,6 +18,16 @@ const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
  */
 export const analyzeSnippet = async (content: string, contentType: string = 'text'): Promise<AIAnalysis> => {
   try {
+    const ai = getClient();
+    if (!ai) {
+      return {
+        title: contentType === 'image' ? "新圖片筆記" : (contentType === 'video' ? "新影片筆記" : "新文字筆記"),
+        summary: "已儲存內容，但自動分析目前不可用。",
+        tags: ["未分類"],
+        category: "一般"
+      };
+    }
+
     let parts: any[] = [];
 
     // 如果是圖片檔案
