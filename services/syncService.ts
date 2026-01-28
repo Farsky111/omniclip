@@ -1,9 +1,7 @@
 
 import { Snippet } from "../types";
 
-// 這裡模擬一個簡易的雲端儲存空間 (實際應用中應連結至後端資料庫)
-// 我們使用一個公共 API 服務來演示同步邏輯
-const SYNC_API_URL = "https://kvdb.io/A4Cun6TzC9R9K7hU3Xj1mY/";
+const SYNC_API_URL = import.meta.env.VITE_SYNC_API_URL || '/api/sync';
 
 /**
  * 將筆記資料上傳至雲端儲存空間 (模擬)
@@ -12,13 +10,22 @@ const SYNC_API_URL = "https://kvdb.io/A4Cun6TzC9R9K7hU3Xj1mY/";
  */
 export const uploadToCloud = async (syncId: string, snippets: Snippet[]) => {
   if (!syncId) return;
+  const code = syncId.trim();
+  if (!code) return;
   try {
-    await fetch(`${SYNC_API_URL}${syncId}`, {
+    const response = await fetch(SYNC_API_URL, {
       method: 'POST',
-      body: JSON.stringify(snippets)
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ code, snippets })
     });
+    if (!response.ok) {
+      throw new Error(`雲端上傳失敗 (${response.status})`);
+    }
   } catch (error) {
     console.error("同步失敗:", error);
+    throw error;
   }
 };
 
@@ -27,15 +34,22 @@ export const uploadToCloud = async (syncId: string, snippets: Snippet[]) => {
  * @param {string} syncId 同步辨別碼
  * @returns {Promise<Snippet[] | null>} 成功則回傳筆記陣列，失敗回傳 null
  */
-export const downloadFromCloud = async (syncId: string): Promise<Snippet[] | null> => {
-  if (!syncId) return null;
+export const downloadFromCloud = async (syncId: string): Promise<Snippet[]> => {
+  if (!syncId) return [];
+  const code = syncId.trim();
+  if (!code) return [];
   try {
-    const response = await fetch(`${SYNC_API_URL}${syncId}`);
+    const response = await fetch(`${SYNC_API_URL}?code=${encodeURIComponent(code)}`);
     if (response.ok) {
-      return await response.json();
+      const json = await response.json();
+      return (json?.snippets || []) as Snippet[];
     }
+    if (response.status === 404) {
+      return [];
+    }
+    throw new Error(`雲端下載失敗 (${response.status})`);
   } catch (error) {
     console.error("下載失敗:", error);
+    throw error;
   }
-  return null;
 };

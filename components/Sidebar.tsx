@@ -9,10 +9,17 @@ interface SidebarProps {
   snippets: Snippet[];
   onAddSnippet: (snippet: Snippet) => void;
   onDeleteSnippet: (id: string) => void;
+  onUpdateSnippetTitle: (id: string, title: string) => void;
+  syncStatus: 'idle' | 'syncing' | 'success' | 'error';
+  syncError: string;
+  lastSyncAt: number | null;
+  lastSyncCount: number;
+  onManualSync: () => void;
+  onUpdateSyncId: (id: string) => void;
   workspaces: Workspace[];
   activeWorkspaceId: string;
   onSwitchWorkspace: (id: string) => void;
-  onAddWorkspace: (name: string, syncId: string) => void;
+  onAddWorkspace: (name: string, syncId: string) => string;
   onDeleteWorkspace: (id: string) => void;
 }
 
@@ -23,10 +30,12 @@ interface SidebarProps {
  */
 const Sidebar: React.FC<SidebarProps> = ({
   isOpen, onClose, snippets, onAddSnippet, onDeleteSnippet,
+  onUpdateSnippetTitle,
+  syncStatus, syncError, lastSyncAt, lastSyncCount, onManualSync,
+  onUpdateSyncId,
   workspaces, activeWorkspaceId, onSwitchWorkspace,
   onAddWorkspace, onDeleteWorkspace
 }) => {
-  const [activeTab, setActiveTab] = useState<'list' | 'settings' | 'help'>('list');
   const [inputValue, setInputValue] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [statusMsg, setStatusMsg] = useState('');
@@ -34,11 +43,20 @@ const Sidebar: React.FC<SidebarProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [isWorkspaceMenuOpen, setIsWorkspaceMenuOpen] = useState(false);
   const [isAddWorkspaceOpen, setIsAddWorkspaceOpen] = useState(false);
+  const [isEditSyncKeyOpen, setIsEditSyncKeyOpen] = useState(false);
   const [workspaceName, setWorkspaceName] = useState('');
   const [workspaceSyncKey, setWorkspaceSyncKey] = useState('');
+  const [syncKeyDraft, setSyncKeyDraft] = useState('');
   const [workspaceToDelete, setWorkspaceToDelete] = useState<Workspace | null>(null);
+  const createId = () => {
+    if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
+      return crypto.randomUUID();
+    }
+    return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+  };
 
   const activeWorkspace = workspaces.find(w => w.id === activeWorkspaceId);
+  const hasSyncKey = Boolean(activeWorkspace?.syncId?.trim());
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoInputRef = useRef<HTMLInputElement>(null);
   const documentInputRef = useRef<HTMLInputElement>(null);
@@ -121,7 +139,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         }
 
         const newSnippet: Snippet = {
-          id: crypto.randomUUID(),
+          id: createId(),
           type,
           content,
           title: analysis.title || file.name,
@@ -162,7 +180,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
       const analysis = await analyzeSnippet(content, type);
       onAddSnippet({
-        id: crypto.randomUUID(),
+        id: createId(),
         type,
         content,
         title: analysis.title,
@@ -184,12 +202,15 @@ const Sidebar: React.FC<SidebarProps> = ({
   });
 
   const displayOpen = isOpen || isPopout;
-  const isDialogOpen = isAddWorkspaceOpen || !!workspaceToDelete;
+  const isDialogOpen = isAddWorkspaceOpen || isEditSyncKeyOpen || !!workspaceToDelete;
 
   const handleCreateWorkspace = () => {
     const name = workspaceName.trim();
     if (!name) return;
-    onAddWorkspace(name, workspaceSyncKey.trim());
+    const newId = onAddWorkspace(name, workspaceSyncKey.trim());
+    if (newId) {
+      onSwitchWorkspace(newId);
+    }
     setWorkspaceName('');
     setWorkspaceSyncKey('');
     setIsAddWorkspaceOpen(false);
@@ -202,10 +223,44 @@ const Sidebar: React.FC<SidebarProps> = ({
     setWorkspaceSyncKey('');
   };
 
+  const handleOpenSyncKey = () => {
+    setSyncKeyDraft(activeWorkspace?.syncId || '');
+    setIsEditSyncKeyOpen(true);
+  };
+
+  const handleSaveSyncKey = () => {
+    onUpdateSyncId(syncKeyDraft.trim());
+    setIsEditSyncKeyOpen(false);
+  };
+
   const handleDeleteWorkspace = () => {
     if (!workspaceToDelete) return;
     onDeleteWorkspace(workspaceToDelete.id);
     setWorkspaceToDelete(null);
+  };
+
+  const handleFileDownload = (snippet: Snippet) => {
+    const link = document.createElement('a');
+    link.href = snippet.content;
+    link.download = snippet.title || `OmniClip_${snippet.id.substring(0, 5)}.bin`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handlePaste = (event: React.ClipboardEvent<HTMLTextAreaElement>) => {
+    const items = event.clipboardData?.items;
+    if (!items) return;
+    for (const item of items) {
+      if (item.kind === 'file' && item.type.startsWith('image/')) {
+        const file = item.getAsFile();
+        if (file) {
+          event.preventDefault();
+          processFile(file, 'image');
+        }
+        break;
+      }
+    }
   };
 
   return (
@@ -216,7 +271,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           <div className="p-3 flex items-center justify-between">
             <h2 className="text-sm font-black text-slate-800">OmniClip</h2>
             <div className="flex gap-1">
-              <button onClick={() => setActiveTab('help')} className="p-2 text-slate-400 hover:text-indigo-600">
+              <button onClick={() => setIsWorkspaceMenuOpen((prev) => !prev)} className="p-2 text-slate-400 hover:text-emerald-600">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
               </button>
               {!isPopout && <button onClick={onClose} className="p-2 text-slate-400">
@@ -224,16 +279,11 @@ const Sidebar: React.FC<SidebarProps> = ({
               </button>}
             </div>
           </div>
-          <div className="flex border-t">
-            <button onClick={() => setActiveTab('list')} className={`flex-1 py-2 text-[11px] font-bold ${activeTab === 'list' ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-slate-400'}`}>列表</button>
-            <button onClick={() => setActiveTab('settings')} className={`flex-1 py-2 text-[11px] font-bold ${activeTab === 'settings' ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-slate-400'}`}>設定</button>
-          </div>
         </div>
 
-        {activeTab === 'list' && (
-          <>
-            <div className="px-3 py-3 bg-white/70 backdrop-blur-xl border-b border-white/40 space-y-3">
-              <div className="flex items-center justify-between">
+        <>
+          <div className="px-3 py-3 bg-white/70 backdrop-blur-xl border-b border-white/40 space-y-3">
+            <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="text-[11px] font-semibold text-slate-500">目前工作區</span>
                   <button
@@ -257,13 +307,30 @@ const Sidebar: React.FC<SidebarProps> = ({
                     新增
                   </button>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setActiveTab('settings')}
-                  className="text-[10px] text-slate-400"
-                >
-                  管理
-                </button>
+                <div className="flex items-center gap-2 text-[10px] text-slate-400">
+                  <span>
+                    {!hasSyncKey && '未設定金鑰'}
+                    {hasSyncKey && syncStatus === 'syncing' && '同步中'}
+                    {hasSyncKey && syncStatus === 'success' && '已同步'}
+                    {hasSyncKey && syncStatus === 'error' && '同步失敗'}
+                    {hasSyncKey && syncStatus === 'idle' && '待同步'}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={handleOpenSyncKey}
+                    className="text-slate-400 hover:text-emerald-600"
+                  >
+                    編輯金鑰
+                  </button>
+                  <button
+                    type="button"
+                    onClick={onManualSync}
+                    disabled={!hasSyncKey}
+                    className="text-emerald-600 font-semibold disabled:text-slate-300"
+                  >
+                    立即同步
+                  </button>
+                </div>
               </div>
 
               {isWorkspaceMenuOpen && (
@@ -330,17 +397,56 @@ const Sidebar: React.FC<SidebarProps> = ({
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-3 space-y-3 no-scrollbar">
+            <div className="flex-1 p-3 space-y-3 no-scrollbar">
               <div className="flex items-center justify-between text-[10px] text-slate-500 px-1">
                 <span className="font-semibold">目前工作區內容</span>
                 <span className="text-emerald-600">{filteredSnippets.length} 則</span>
               </div>
-              {filteredSnippets.map((s) => (
-                <SnippetCard key={s.id} snippet={s} onDelete={onDeleteSnippet} onCopy={(t) => navigator.clipboard.writeText(t)} />
-              ))}
-              {!filteredSnippets.length && (
-                <div className="text-[11px] text-slate-400 text-center py-10">尚無內容</div>
+              {syncStatus === 'error' && syncError && (
+                <div className="text-[10px] text-rose-600 bg-rose-50 border border-rose-100 rounded-lg px-2 py-1">
+                  同步錯誤：{syncError}
+                </div>
               )}
+              {hasSyncKey && syncStatus === 'success' && (
+                <div className="text-[10px] text-slate-400 px-1">雲端筆記：{lastSyncCount} 則</div>
+              )}
+              {lastSyncAt && (
+                <div className="text-[10px] text-slate-400 px-1">上次同步：{new Date(lastSyncAt).toLocaleTimeString('zh-TW')}</div>
+              )}
+              <div className="bg-white/70 border border-white/50 rounded-xl p-2 max-h-72 overflow-y-auto">
+                {filter === 'file' ? (
+                  <div className="grid grid-cols-1 gap-2">
+                    {filteredSnippets.map((snippet) => (
+                      <div key={snippet.id} className="flex items-center justify-between rounded-lg border border-white/60 bg-slate-50/70 px-2 py-2">
+                        <div className="flex items-center gap-2 text-left">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 3v4a1 1 0 001 1h4M5 21h14a2 2 0 002-2V7.5L14.5 3H5a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                          <span className="text-[11px] font-semibold text-slate-600 line-clamp-2">{snippet.title || '檔案'}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button type="button" onClick={() => handleFileDownload(snippet)} className="text-emerald-600 text-[10px] font-semibold">下載</button>
+                          <button type="button" onClick={() => navigator.clipboard.writeText(snippet.content)} className="text-slate-400 text-[10px] font-semibold">複製</button>
+                          <button type="button" onClick={() => onDeleteSnippet(snippet.id)} className="text-rose-500 text-[10px] font-semibold">刪除</button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {filteredSnippets.map((s) => (
+                    <SnippetCard
+                      key={s.id}
+                      snippet={s}
+                      onDelete={onDeleteSnippet}
+                      onCopy={(t) => navigator.clipboard.writeText(t)}
+                      onUpdateTitle={onUpdateSnippetTitle}
+                    />
+                    ))}
+                  </div>
+                )}
+                {!filteredSnippets.length && (
+                  <div className="text-[11px] text-slate-400 text-center py-10">尚無內容</div>
+                )}
+              </div>
             </div>
 
             <div className="p-3 bg-white/70 backdrop-blur-xl border-t border-white/40 space-y-2">
@@ -365,51 +471,15 @@ const Sidebar: React.FC<SidebarProps> = ({
                 className="w-full p-2 bg-slate-50/80 border border-white/60 rounded-lg text-xs resize-none"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
+                onPaste={handlePaste}
               />
               <button disabled={isAnalyzing || !inputValue.trim()} onClick={handleAdd} className="w-full py-2 bg-emerald-600 text-white text-xs font-bold rounded-lg disabled:bg-slate-300">儲存</button>
             </div>
-          </>
-        )}
-
-        {activeTab === 'settings' && (
-          <div className="p-4 space-y-4 overflow-y-auto no-scrollbar">
-            <section className="space-y-3">
-              <div className="flex items-center justify-between">
-                <h3 className="text-xs font-bold text-slate-500 uppercase flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
-                  工作區管理
-                </h3>
-                <button
-                  type="button"
-                  onClick={() => setIsAddWorkspaceOpen(true)}
-                  className="text-[10px] font-semibold text-emerald-600"
-                >
-                  新增工作區
-                </button>
-              </div>
-              <div className="space-y-2">
-                {workspaces.map(ws => (
-                  <div key={ws.id} className={`flex items-center justify-between p-2 rounded-lg border ${ws.id === activeWorkspaceId ? 'bg-emerald-50 border-emerald-200' : 'bg-white/70 border-white/60'}`}>
-                    <button onClick={() => onSwitchWorkspace(ws.id)} className="flex-1 text-left text-xs font-semibold truncate pr-2">
-                      {ws.name}
-                      {ws.id === activeWorkspaceId && <span className="ml-2 text-[9px] bg-emerald-600 text-white px-1.5 py-0.5 rounded">目前使用</span>}
-                    </button>
-                    {workspaces.length > 1 && (
-                      <button onClick={() => setWorkspaceToDelete(ws)} className="p-1 text-rose-500 hover:text-rose-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                      </button>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <p className="text-[10px] text-slate-500">刪除後將同步移除所有裝置內容與設定。</p>
-            </section>
-          </div>
-        )}
+        </>
 
         {isDialogOpen && (
           <div
-            className="absolute inset-0 bg-black/20 backdrop-blur-[2px] z-30"
+            className="fixed inset-0 bg-black/20 backdrop-blur-[2px] z-40"
             onClick={() => {
               setWorkspaceToDelete(null);
               handleCancelWorkspace();
@@ -418,7 +488,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         )}
 
         {isAddWorkspaceOpen && (
-          <div className="absolute inset-0 z-40 flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <div
               className="w-full max-w-sm bg-white/80 backdrop-blur-xl border border-white/60 rounded-2xl p-4 space-y-3"
               onClick={(e) => e.stopPropagation()}
@@ -460,7 +530,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         )}
 
         {workspaceToDelete && (
-          <div className="absolute inset-0 z-40 flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <div
               className="w-full max-w-sm bg-white/80 backdrop-blur-xl border border-white/60 rounded-2xl p-4 space-y-2"
               onClick={(e) => e.stopPropagation()}
@@ -471,6 +541,29 @@ const Sidebar: React.FC<SidebarProps> = ({
               <div className="flex justify-end gap-2">
                 <button onClick={() => setWorkspaceToDelete(null)} className="px-3 py-2 rounded-lg text-xs font-semibold bg-slate-100 text-slate-500">取消</button>
                 <button onClick={handleDeleteWorkspace} className="px-3 py-2 rounded-lg text-xs font-semibold bg-rose-500 text-white">刪除</button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {isEditSyncKeyOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div
+              className="w-full max-w-sm bg-white/80 backdrop-blur-xl border border-white/60 rounded-2xl p-4 space-y-3"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3 className="text-sm font-bold text-slate-800">編輯同步金鑰</h3>
+              <p className="text-[11px] text-slate-500">使用自訂短密碼（例如：team-a）</p>
+              <input
+                type="text"
+                value={syncKeyDraft}
+                onChange={(e) => setSyncKeyDraft(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg bg-slate-100/80 text-xs"
+                placeholder="例如：team-a"
+              />
+              <div className="flex justify-end gap-2">
+                <button onClick={() => setIsEditSyncKeyOpen(false)} className="px-3 py-2 rounded-lg text-xs font-semibold bg-slate-100 text-slate-500">取消</button>
+                <button onClick={handleSaveSyncKey} className="px-3 py-2 rounded-lg text-xs font-semibold bg-emerald-600 text-white">儲存</button>
               </div>
             </div>
           </div>

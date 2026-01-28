@@ -10,7 +10,7 @@
       "clip": true,
       "width": 1440,
       "height": 1080,
-      "fill": "#F5F4F1",
+      "fill": "#F5F4F180",
       "layout": "none",
       "children": [
         {
@@ -40,7 +40,7 @@
           "y": 140,
           "name": "Workspace Dropdown - Desktop",
           "width": 360,
-          "fill": "#FFFFFF",
+          "fill": "#FFFFFFCC",
           "cornerRadius": 16,
           "layout": "vertical",
           "gap": 8,
@@ -116,6 +116,7 @@
                 8,
                 10
               ],
+              "justifyContent": "space_between",
               "alignItems": "center",
               "children": [
                 {
@@ -127,6 +128,16 @@
                   "fontFamily": "Outfit",
                   "fontSize": 11,
                   "fontWeight": "600"
+                },
+                {
+                  "type": "icon_font",
+                  "id": "e5QJ6",
+                  "name": "delIcon2",
+                  "width": 12,
+                  "height": 12,
+                  "iconFontName": "trash-2",
+                  "iconFontFamily": "lucide",
+                  "fill": "#D08068"
                 }
               ]
             },
@@ -141,6 +152,7 @@
                 8,
                 10
               ],
+              "justifyContent": "space_between",
               "alignItems": "center",
               "children": [
                 {
@@ -152,6 +164,16 @@
                   "fontFamily": "Outfit",
                   "fontSize": 11,
                   "fontWeight": "600"
+                },
+                {
+                  "type": "icon_font",
+                  "id": "iI5cr",
+                  "name": "delIcon3",
+                  "width": 12,
+                  "height": 12,
+                  "iconFontName": "trash-2",
+                  "iconFontFamily": "lucide",
+                  "fill": "#D08068"
                 }
               ]
             },
@@ -302,8 +324,10 @@
               "type": "frame",
               "id": "FHgnP",
               "name": "Hero",
-              "width": "fill_container",
+              "rotation": 0.00982125818030263,
+              "width": 1254,
               "gap": 48,
+              "justifyContent": "end",
               "alignItems": "center",
               "children": [
                 {
@@ -330,7 +354,7 @@
                       "id": "MtPEI",
                       "name": "heroTitle",
                       "fill": "#1A1918",
-                      "content": "一鍵收納文字、圖片、影片，跨裝置即時同步",
+                      "content": "一鍵收納文字、圖片、影片，\n跨裝置即時同步",
                       "fontFamily": "Outfit",
                       "fontSize": 38,
                       "fontWeight": "700"
@@ -342,7 +366,8 @@
                       "fill": "#6D6C6A",
                       "content": "OmniClip 讓你在任何網頁快速擷取與整理，AI 自動摘要與標籤，工作區隔離管理。",
                       "fontFamily": "Outfit",
-                      "fontSize": 16
+                      "fontSize": 16,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -358,7 +383,8 @@
                           "fill": "#6D6C6A",
                           "content": "• 支援大型檔案與本地 IndexedDB 儲存",
                           "fontFamily": "Outfit",
-                          "fontSize": 13
+                          "fontSize": 13,
+                          "fontWeight": "normal"
                         },
                         {
                           "type": "text",
@@ -367,7 +393,8 @@
                           "fill": "#6D6C6A",
                           "content": "• 30 秒雲端同步與版本合併",
                           "fontFamily": "Outfit",
-                          "fontSize": 13
+                          "fontSize": 13,
+                          "fontWeight": "normal"
                         },
                         {
                           "type": "text",
@@ -376,7 +403,8 @@
                           "fill": "#6D6C6A",
                           "content": "• 多工作區切換，資料互不干擾",
                           "fontFamily": "Outfit",
-                          "fontSize": 13
+                          "fontSize": 13,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -433,6 +461,16 @@
                           ]
                         }
                       ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "sD4Xp",
+                      "name": "Frame 1",
+                      "clip": true,
+                      "width": 50,
+                      "height": 3,
+                      "fill": "#FFFFFF",
+                      "layout": "none"
                     }
                   ]
                 },
@@ -442,7 +480,7 @@
                   "name": "Preview Card",
                   "width": 520,
                   "height": 560,
-                  "fill": "#FFFFFF",
+                  "fill": "#FFFFFFCC",
                   "cornerRadius": 20,
                   "layout": "vertical",
                   "gap": 16,
@@ -541,6 +579,41 @@
                           "fontFamily": "Outfit",
                           "fontSize": 10,
                           "fontWeight": "600"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "aYKQh",
+                          "name": "Add Workspace",
+                          "fill": "#3D8A5A",
+                          "cornerRadius": 100,
+                          "gap": 4,
+                          "padding": [
+                            4,
+                            8
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "8UWHs",
+                              "name": "addWorkspaceIcon",
+                              "width": 10,
+                              "height": 10,
+                              "iconFontName": "plus",
+                              "iconFontFamily": "lucide",
+                              "fill": "#FFFFFF"
+                            },
+                            {
+                              "type": "text",
+                              "id": "P5Ft7",
+                              "name": "addWorkspaceText",
+                              "fill": "#FFFFFF",
+                              "content": "新增",
+                              "fontFamily": "Outfit",
+                              "fontSize": 9,
+                              "fontWeight": "600"
+                            }
+                          ]
                         }
                       ]
                     },
@@ -663,7 +736,7 @@
                       "name": "Search",
                       "width": "fill_container",
                       "height": 44,
-                      "fill": "#F5F4F1",
+                      "fill": "#F5F4F1CC",
                       "cornerRadius": 12,
                       "gap": 8,
                       "padding": [
@@ -689,7 +762,7 @@
                           "fill": "#9C9B99",
                           "content": "搜尋內容...",
                           "fontFamily": "Outfit",
-                          "fontSize": 12,
+                          "fontSize": 11,
                           "fontWeight": "500"
                         }
                       ]
@@ -840,7 +913,8 @@
                               "fill": "#6D6C6A",
                               "content": "AI 摘要：待辦 3 項、重點 5 條",
                               "fontFamily": "Outfit",
-                              "fontSize": 11
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
@@ -872,7 +946,8 @@
                               "fill": "#6D6C6A",
                               "content": "AI 摘要：收錄於行銷素材",
                               "fontFamily": "Outfit",
-                              "fontSize": 11
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
@@ -904,7 +979,8 @@
                               "fill": "#6D6C6A",
                               "content": "AI 摘要：會議重點與時間碼",
                               "fontFamily": "Outfit",
-                              "fontSize": 11
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -986,6 +1062,41 @@
                               "fontWeight": "600"
                             }
                           ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "NaGFT",
+                          "name": "uploadFile",
+                          "fill": "#FFFFFF",
+                          "cornerRadius": 10,
+                          "gap": 6,
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "cPzuq",
+                              "name": "uploadFileIcon",
+                              "width": 12,
+                              "height": 12,
+                              "iconFontName": "file",
+                              "iconFontFamily": "lucide",
+                              "fill": "#6D6C6A"
+                            },
+                            {
+                              "type": "text",
+                              "id": "KCy5A",
+                              "name": "uploadFileText",
+                              "fill": "#6D6C6A",
+                              "content": "上傳檔案",
+                              "fontFamily": "Outfit",
+                              "fontSize": 11,
+                              "fontWeight": "600"
+                            }
+                          ]
                         }
                       ]
                     },
@@ -994,7 +1105,7 @@
                       "id": "6dGc3",
                       "name": "Quick Add",
                       "width": "fill_container",
-                      "fill": "#F5F4F1",
+                      "fill": "#F5F4F1CC",
                       "cornerRadius": 12,
                       "gap": 8,
                       "padding": [
@@ -1075,6 +1186,7 @@
                       "type": "frame",
                       "id": "O6t1P",
                       "name": "Sync Key",
+                      "enabled": false,
                       "width": "fill_container",
                       "fill": "#FAFAF8",
                       "cornerRadius": 12,
@@ -1159,13 +1271,6 @@
               ]
             },
             {
-              "type": "rectangle",
-              "id": "JOTZ9",
-              "fill": "#CCCCCC",
-              "width": 205,
-              "height": 83
-            },
-            {
               "type": "frame",
               "id": "xsl0K",
               "name": "Features",
@@ -1238,7 +1343,8 @@
                           "fill": "#6D6C6A",
                           "content": "不打斷工作流，隨時收納與整理。",
                           "fontFamily": "Outfit",
-                          "fontSize": 12
+                          "fontSize": 12,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -1270,7 +1376,8 @@
                           "fill": "#6D6C6A",
                           "content": "Gemini 自動整理重點與分類。",
                           "fontFamily": "Outfit",
-                          "fontSize": 12
+                          "fontSize": 12,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -1302,9 +1409,284 @@
                           "fill": "#6D6C6A",
                           "content": "每個專案獨立資料與同步金鑰。",
                           "fontFamily": "Outfit",
-                          "fontSize": 12
+                          "fontSize": 12,
+                          "fontWeight": "normal"
                         }
                       ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "rectangle",
+          "id": "UFFw2",
+          "x": 0,
+          "y": 0,
+          "name": "Modal Overlay",
+          "fill": "#00000026",
+          "width": 1440,
+          "height": 1080
+        },
+        {
+          "type": "frame",
+          "id": "TOAX8",
+          "x": 880,
+          "y": 240,
+          "name": "Add Workspace Modal",
+          "width": 420,
+          "fill": "#FFFFFFCC",
+          "cornerRadius": 16,
+          "layout": "vertical",
+          "gap": 10,
+          "padding": 16,
+          "children": [
+            {
+              "type": "text",
+              "id": "QIkbu",
+              "name": "modalTitle",
+              "fill": "#1A1918",
+              "content": "新增工作區",
+              "fontFamily": "Outfit",
+              "fontSize": 14,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "FQ5ZB",
+              "name": "nameLabel",
+              "fill": "#6D6C6A",
+              "content": "工作區名稱",
+              "fontFamily": "Outfit",
+              "fontSize": 11,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "Jsf97",
+              "name": "Name Input",
+              "width": "fill_container",
+              "height": 36,
+              "fill": "#F5F4F1CC",
+              "cornerRadius": 10,
+              "padding": [
+                8,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "E6pln",
+                  "name": "namePlaceholder",
+                  "fill": "#9C9B99",
+                  "content": "例如：行銷素材",
+                  "fontFamily": "Outfit",
+                  "fontSize": 11,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "pKqXO",
+              "name": "keyLabel",
+              "fill": "#6D6C6A",
+              "content": "設定工作區專屬跨裝置密碼",
+              "fontFamily": "Outfit",
+              "fontSize": 11,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "MydDd",
+              "name": "Key Input",
+              "width": "fill_container",
+              "height": 36,
+              "fill": "#F5F4F1CC",
+              "cornerRadius": 10,
+              "padding": [
+                8,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "XEolt",
+                  "name": "keyPlaceholder",
+                  "fill": "#9C9B99",
+                  "content": "輸入或貼上金鑰",
+                  "fontFamily": "Outfit",
+                  "fontSize": 11,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "2DgOY",
+              "name": "Actions",
+              "width": "fill_container",
+              "gap": 8,
+              "justifyContent": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "XRwu9",
+                  "name": "cancelBtn",
+                  "fill": "#EDECEA",
+                  "cornerRadius": 10,
+                  "padding": [
+                    8,
+                    12
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "7QNI0",
+                      "name": "cancelText",
+                      "fill": "#6D6C6A",
+                      "content": "取消",
+                      "fontFamily": "Outfit",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "JUg5E",
+                  "name": "createBtn",
+                  "fill": "#3D8A5A",
+                  "cornerRadius": 10,
+                  "padding": [
+                    8,
+                    12
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "btO35",
+                      "name": "createText",
+                      "fill": "#FFFFFF",
+                      "content": "建立",
+                      "fontFamily": "Outfit",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "rectangle",
+          "id": "beyNm",
+          "x": 0,
+          "y": 0,
+          "name": "Delete Overlay",
+          "fill": "#00000026",
+          "width": 1440,
+          "height": 1080
+        },
+        {
+          "type": "frame",
+          "id": "MwOMi",
+          "x": 880,
+          "y": 520,
+          "name": "Delete Workspace Modal",
+          "width": 420,
+          "fill": "#FFFFFFCC",
+          "cornerRadius": 16,
+          "layout": "vertical",
+          "gap": 10,
+          "padding": 16,
+          "children": [
+            {
+              "type": "text",
+              "id": "2wQqm",
+              "name": "deleteTitle",
+              "fill": "#1A1918",
+              "content": "刪除工作區？",
+              "fontFamily": "Outfit",
+              "fontSize": 14,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "xiw8p",
+              "name": "deleteBody",
+              "fill": "#6D6C6A",
+              "content": "確定要刪除「團隊共享」嗎？",
+              "fontFamily": "Outfit",
+              "fontSize": 11,
+              "fontWeight": "500"
+            },
+            {
+              "type": "text",
+              "id": "ItFhA",
+              "name": "deleteNote",
+              "fill": "#D08068",
+              "content": "刪除後將同步移除所有裝置的內容與設定。",
+              "fontFamily": "Outfit",
+              "fontSize": 10,
+              "fontWeight": "500"
+            },
+            {
+              "type": "frame",
+              "id": "TSYSX",
+              "name": "Actions",
+              "width": "fill_container",
+              "gap": 8,
+              "justifyContent": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "HPGQX",
+                  "name": "deleteCancel",
+                  "fill": "#EDECEA",
+                  "cornerRadius": 10,
+                  "padding": [
+                    8,
+                    12
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "6J25X",
+                      "name": "deleteCancelText",
+                      "fill": "#6D6C6A",
+                      "content": "取消",
+                      "fontFamily": "Outfit",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "XAwwR",
+                  "name": "deleteConfirm",
+                  "fill": "#D08068",
+                  "cornerRadius": 10,
+                  "padding": [
+                    8,
+                    12
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "c11hO",
+                      "name": "deleteConfirmText",
+                      "fill": "#FFFFFF",
+                      "content": "刪除",
+                      "fontFamily": "Outfit",
+                      "fontSize": 11,
+                      "fontWeight": "600"
                     }
                   ]
                 }
@@ -1317,13 +1699,13 @@
     {
       "type": "frame",
       "id": "koJPF",
-      "x": -5,
-      "y": 468,
+      "x": -3,
+      "y": 484,
       "name": "OmniClip Mobile",
       "clip": true,
       "width": 390,
       "height": 844,
-      "fill": "#F5F4F1",
+      "fill": "#F5F4F180",
       "layout": "none",
       "children": [
         {
@@ -1338,12 +1720,114 @@
         },
         {
           "type": "frame",
+          "id": "v9fa7",
+          "x": 14,
+          "y": 220,
+          "name": "Delete Workspace Modal",
+          "reusable": true,
+          "width": 280,
+          "fill": "#FFFFFFCC",
+          "cornerRadius": 14,
+          "layout": "vertical",
+          "gap": 8,
+          "padding": 12,
+          "children": [
+            {
+              "type": "text",
+              "id": "oKLTK",
+              "name": "mobileDeleteTitle",
+              "fill": "#1A1918",
+              "content": "刪除工作區？",
+              "fontFamily": "Outfit",
+              "fontSize": 12,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "kx5Jr",
+              "name": "mobileDeleteBody",
+              "fill": "#6D6C6A",
+              "content": "確定要刪除「團隊共享」嗎？",
+              "fontFamily": "Outfit",
+              "fontSize": 10,
+              "fontWeight": "500"
+            },
+            {
+              "type": "text",
+              "id": "2gibU",
+              "name": "mobileDeleteNote",
+              "fill": "#D08068",
+              "content": "刪除後將同步移除所有裝置內容。",
+              "fontFamily": "Outfit",
+              "fontSize": 9,
+              "fontWeight": "500"
+            },
+            {
+              "type": "frame",
+              "id": "JRdWa",
+              "name": "Actions",
+              "width": "fill_container",
+              "gap": 6,
+              "justifyContent": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "bSBy4",
+                  "name": "mobileDeleteCancel",
+                  "fill": "#EDECEA",
+                  "cornerRadius": 10,
+                  "padding": [
+                    6,
+                    10
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Lzow1",
+                      "name": "mobileDeleteCancelText",
+                      "fill": "#6D6C6A",
+                      "content": "取消",
+                      "fontFamily": "Outfit",
+                      "fontSize": 10,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "yj4wd",
+                  "name": "mobileDeleteConfirm",
+                  "fill": "#D08068",
+                  "cornerRadius": 10,
+                  "padding": [
+                    6,
+                    10
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Q82tT",
+                      "name": "mobileDeleteConfirmText",
+                      "fill": "#FFFFFF",
+                      "content": "刪除",
+                      "fontFamily": "Outfit",
+                      "fontSize": 10,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
           "id": "mPUne",
           "x": 60,
           "y": 300,
           "name": "Workspace Dropdown - Mobile",
           "width": 240,
-          "fill": "#FFFFFF",
+          "fill": "#FFFFFFCC",
           "cornerRadius": 14,
           "layout": "vertical",
           "gap": 6,
@@ -1419,6 +1903,7 @@
                 6,
                 8
               ],
+              "justifyContent": "space_between",
               "alignItems": "center",
               "children": [
                 {
@@ -1430,6 +1915,16 @@
                   "fontFamily": "Outfit",
                   "fontSize": 10,
                   "fontWeight": "600"
+                },
+                {
+                  "type": "icon_font",
+                  "id": "pNAlz",
+                  "name": "delIconM2",
+                  "width": 11,
+                  "height": 11,
+                  "iconFontName": "trash-2",
+                  "iconFontFamily": "lucide",
+                  "fill": "#D08068"
                 }
               ]
             },
@@ -1444,6 +1939,7 @@
                 6,
                 8
               ],
+              "justifyContent": "space_between",
               "alignItems": "center",
               "children": [
                 {
@@ -1455,6 +1951,16 @@
                   "fontFamily": "Outfit",
                   "fontSize": 10,
                   "fontWeight": "600"
+                },
+                {
+                  "type": "icon_font",
+                  "id": "kMIDY",
+                  "name": "delIconM3",
+                  "width": 11,
+                  "height": 11,
+                  "iconFontName": "trash-2",
+                  "iconFontFamily": "lucide",
+                  "fill": "#D08068"
                 }
               ]
             },
@@ -1587,7 +2093,8 @@
                   "fill": "#6D6C6A",
                   "content": "支援文字、圖片、影片與網址，AI 自動摘要並同步到每個裝置。",
                   "fontFamily": "Outfit",
-                  "fontSize": 13
+                  "fontSize": 13,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -1619,7 +2126,7 @@
               "id": "pgrb6",
               "name": "Mobile Preview",
               "width": "fill_container",
-              "fill": "#FFFFFF",
+              "fill": "#FFFFFFCC",
               "cornerRadius": 16,
               "layout": "vertical",
               "gap": 12,
@@ -1718,6 +2225,41 @@
                       "fontFamily": "Outfit",
                       "fontSize": 9,
                       "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "U6MSP",
+                      "name": "Add Workspace",
+                      "fill": "#3D8A5A",
+                      "cornerRadius": 100,
+                      "gap": 4,
+                      "padding": [
+                        3,
+                        6
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "ddvf4",
+                          "name": "mobileAddWorkspaceIcon",
+                          "width": 9,
+                          "height": 9,
+                          "iconFontName": "plus",
+                          "iconFontFamily": "lucide",
+                          "fill": "#FFFFFF"
+                        },
+                        {
+                          "type": "text",
+                          "id": "FIzpH",
+                          "name": "mobileAddWorkspaceText",
+                          "fill": "#FFFFFF",
+                          "content": "新增",
+                          "fontFamily": "Outfit",
+                          "fontSize": 8,
+                          "fontWeight": "600"
+                        }
+                      ]
                     }
                   ]
                 },
@@ -1840,7 +2382,7 @@
                   "name": "Search",
                   "width": "fill_container",
                   "height": 40,
-                  "fill": "#F5F4F1",
+                  "fill": "#F5F4F1CC",
                   "cornerRadius": 12,
                   "gap": 6,
                   "padding": [
@@ -1909,7 +2451,8 @@
                       "fill": "#6D6C6A",
                       "content": "AI 摘要：整理為 3 個重點",
                       "fontFamily": "Outfit",
-                      "fontSize": 10
+                      "fontSize": 10,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -1989,6 +2532,41 @@
                           "fontWeight": "600"
                         }
                       ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "GnktX",
+                      "name": "mobileUploadFile",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 10,
+                      "gap": 4,
+                      "padding": [
+                        6,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "EvSIV",
+                          "name": "mobileUploadFileIcon",
+                          "width": 11,
+                          "height": 11,
+                          "iconFontName": "file",
+                          "iconFontFamily": "lucide",
+                          "fill": "#6D6C6A"
+                        },
+                        {
+                          "type": "text",
+                          "id": "QJY3z",
+                          "name": "mobileUploadFileText",
+                          "fill": "#6D6C6A",
+                          "content": "檔案",
+                          "fontFamily": "Outfit",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
                     }
                   ]
                 },
@@ -1997,7 +2575,7 @@
                   "id": "iBJaC",
                   "name": "Quick Add",
                   "width": "fill_container",
-                  "fill": "#F5F4F1",
+                  "fill": "#F5F4F1CC",
                   "cornerRadius": 12,
                   "gap": 6,
                   "padding": [
@@ -2055,6 +2633,7 @@
                   "type": "frame",
                   "id": "1ImH6",
                   "name": "Sync Key",
+                  "enabled": false,
                   "width": "fill_container",
                   "fill": "#FAFAF8",
                   "cornerRadius": 12,
@@ -2247,6 +2826,159 @@
               ]
             }
           ]
+        },
+        {
+          "type": "rectangle",
+          "id": "FBi29",
+          "x": 0,
+          "y": 0,
+          "name": "Modal Overlay",
+          "fill": "#00000026",
+          "width": 390,
+          "height": 844
+        },
+        {
+          "type": "frame",
+          "id": "NiPdu",
+          "x": 55,
+          "y": 230,
+          "name": "Add Workspace Modal",
+          "width": 280,
+          "fill": "#FFFFFFCC",
+          "cornerRadius": 14,
+          "layout": "vertical",
+          "gap": 8,
+          "padding": 12,
+          "children": [
+            {
+              "type": "text",
+              "id": "p5utE",
+              "name": "mobileTitle",
+              "fill": "#1A1918",
+              "content": "新增工作區",
+              "fontFamily": "Outfit",
+              "fontSize": 12,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "n0Odb",
+              "name": "Name Input",
+              "width": "fill_container",
+              "height": 32,
+              "fill": "#F5F4F1CC",
+              "cornerRadius": 10,
+              "padding": [
+                6,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "2fXD0",
+                  "name": "mobileNamePlaceholder",
+                  "fill": "#9C9B99",
+                  "content": "工作區名稱",
+                  "fontFamily": "Outfit",
+                  "fontSize": 10,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "PUAMY",
+              "name": "Key Input",
+              "width": "fill_container",
+              "height": 32,
+              "fill": "#F5F4F1CC",
+              "cornerRadius": 10,
+              "padding": [
+                6,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "7Ae9G",
+                  "name": "mobileKeyPlaceholder",
+                  "fill": "#9C9B99",
+                  "content": "設定工作區專屬跨裝置密碼",
+                  "fontFamily": "Outfit",
+                  "fontSize": 10,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ntElr",
+              "name": "Actions",
+              "width": "fill_container",
+              "gap": 6,
+              "justifyContent": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "UAsos",
+                  "name": "mobileCancel",
+                  "fill": "#EDECEA",
+                  "cornerRadius": 10,
+                  "padding": [
+                    6,
+                    10
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ROjxp",
+                      "name": "mobileCancelText",
+                      "fill": "#6D6C6A",
+                      "content": "取消",
+                      "fontFamily": "Outfit",
+                      "fontSize": 10,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "04Xy3",
+                  "name": "mobileCreate",
+                  "fill": "#3D8A5A",
+                  "cornerRadius": 10,
+                  "padding": [
+                    6,
+                    10
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "fuGUF",
+                      "name": "mobileCreateText",
+                      "fill": "#FFFFFF",
+                      "content": "建立",
+                      "fontFamily": "Outfit",
+                      "fontSize": 10,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "rectangle",
+          "id": "ZUmPV",
+          "x": 0,
+          "y": 0,
+          "name": "Delete Overlay",
+          "fill": "#00000026",
+          "width": 390,
+          "height": 844
         }
       ]
     }

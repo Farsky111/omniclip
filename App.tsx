@@ -8,10 +8,21 @@ import { saveSnippetsToDB, loadSnippetsFromDB } from './services/dbService';
 
 const WORKSPACES_KEY = 'omniclip_workspaces';
 const ACTIVE_WORKSPACE_ID_KEY = 'omniclip_active_workspace_id';
+const SNIPPETS_KEY_PREFIX = 'omniclip_snippets_';
 
 const App: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [snippets, setSnippets] = useState<Snippet[]>([]);
+  const [syncStatus, setSyncStatus] = useState<'idle' | 'syncing' | 'success' | 'error'>('idle');
+  const [lastSyncAt, setLastSyncAt] = useState<number | null>(null);
+  const [syncError, setSyncError] = useState<string>('');
+  const [lastSyncCount, setLastSyncCount] = useState<number>(0);
+  const createId = () => {
+    if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
+      return crypto.randomUUID();
+    }
+    return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+  };
   const [workspaces, setWorkspaces] = useState<Workspace[]>(() => {
     const saved = localStorage.getItem(WORKSPACES_KEY);
     if (saved) return JSON.parse(saved);
@@ -39,10 +50,42 @@ const App: React.FC = () => {
 
   // 2. 初始化/切換：從對應工作區的 IndexedDB 載入資料
   useEffect(() => {
+    setSyncStatus('idle');
+    setSyncError('');
+    setLastSyncAt(null);
+    setLastSyncCount(0);
+    setSnippets([]);
     loadSnippetsFromDB(activeWorkspaceId).then(saved => {
-      setSnippets(saved || []);
+      if (saved && saved.length) {
+        setSnippets(saved);
+        return;
+      }
+      const fallback = localStorage.getItem(`${SNIPPETS_KEY_PREFIX}${activeWorkspaceId}`);
+      if (fallback) {
+        try {
+          const parsed = JSON.parse(fallback) as Snippet[];
+          setSnippets(parsed || []);
+          return;
+        } catch {
+          setSnippets([]);
+          return;
+        }
+      }
+      setSnippets([]);
     });
   }, [activeWorkspaceId]);
+
+  const mergeSnippets = (localSnippets: Snippet[], cloudSnippets: Snippet[]) => {
+    const mergedMap = new Map<string, Snippet>();
+    localSnippets.forEach((s) => mergedMap.set(s.id, s));
+    cloudSnippets.forEach((s) => {
+      const existing = mergedMap.get(s.id);
+      if (!existing || s.timestamp > existing.timestamp) {
+        mergedMap.set(s.id, s);
+      }
+    });
+    return Array.from(mergedMap.values()).sort((a, b) => b.timestamp - a.timestamp);
+  };
 
   // 3. 雲端同步邏輯 (與工作區綁定)
   useEffect(() => {
@@ -50,20 +93,18 @@ const App: React.FC = () => {
     if (!syncId) return;
 
     const performSync = async () => {
-      const cloudData = await downloadFromCloud(syncId);
-      if (cloudData) {
-        setSnippets(prev => {
-          const merged = [...prev];
-          cloudData.forEach(cloudSnippet => {
-            const index = merged.findIndex(s => s.id === cloudSnippet.id);
-            if (index !== -1) {
-              merged[index] = cloudSnippet;
-            } else {
-              merged.unshift(cloudSnippet);
-            }
-          });
-          return merged.sort((a, b) => b.timestamp - a.timestamp);
-        });
+      try {
+        setSyncStatus('syncing');
+        const cloudData = await downloadFromCloud(syncId);
+        setSnippets(prev => mergeSnippets(prev, cloudData));
+        setSyncStatus('success');
+        setLastSyncAt(Date.now());
+        setLastSyncCount(cloudData.length);
+        setSyncError('');
+      } catch (error) {
+        setSyncStatus('error');
+        const message = error instanceof Error ? error.message : '同步失敗';
+        setSyncError(`${message}，請確認同步密碼是否正確或伺服器已部署`);
       }
     };
     performSync();
@@ -75,16 +116,51 @@ const App: React.FC = () => {
   useEffect(() => {
     if (!activeWorkspaceId) return;
     saveSnippetsToDB(activeWorkspaceId, snippets);
+    localStorage.setItem(`${SNIPPETS_KEY_PREFIX}${activeWorkspaceId}`, JSON.stringify(snippets));
 
     const syncId = activeWorkspace?.syncId;
     if (syncId) {
-      const timer = setTimeout(() => {
-        const syncableSnippets = snippets.filter(s => s.content.length < 5 * 1024 * 1024);
-        uploadToCloud(syncId, syncableSnippets);
+      const timer = setTimeout(async () => {
+        try {
+          setSyncStatus('syncing');
+          const syncableSnippets = snippets.filter(s => s.content.length < 5 * 1024 * 1024);
+          const cloudData = await downloadFromCloud(syncId);
+          const merged = mergeSnippets(syncableSnippets, cloudData);
+          if (merged.length !== syncableSnippets.length) {
+            setSnippets(merged);
+          }
+          await uploadToCloud(syncId, merged);
+          setSyncStatus('success');
+          setLastSyncAt(Date.now());
+          setLastSyncCount(merged.length);
+          setSyncError('');
+        } catch (error) {
+          setSyncStatus('error');
+          const message = error instanceof Error ? error.message : '同步失敗';
+          setSyncError(`${message}，請確認同步密碼是否正確或伺服器已部署`);
+        }
       }, 2000);
       return () => clearTimeout(timer);
     }
   }, [snippets, activeWorkspaceId, activeWorkspace?.syncId]);
+
+  const manualSync = async () => {
+    const syncId = activeWorkspace?.syncId;
+    if (!syncId) return;
+    try {
+      setSyncStatus('syncing');
+      const cloudData = await downloadFromCloud(syncId);
+      setSnippets(prev => mergeSnippets(prev, cloudData));
+      setSyncStatus('success');
+      setLastSyncAt(Date.now());
+      setLastSyncCount(cloudData.length);
+      setSyncError('');
+    } catch (error) {
+      setSyncStatus('error');
+      const message = error instanceof Error ? error.message : '同步失敗';
+      setSyncError(`${message}，請確認同步密碼是否正確或伺服器已部署`);
+    }
+  };
 
   const addSnippet = (snippet: Snippet) => {
     setSnippets(prev => [snippet, ...prev]);
@@ -94,10 +170,22 @@ const App: React.FC = () => {
     setSnippets(prev => prev.filter(s => s.id !== id));
   };
 
+  const updateSnippetTitle = (id: string, title: string) => {
+    setSnippets(prev => prev.map(s => (s.id === id ? { ...s, title } : s)));
+  };
+
   const addWorkspace = (name: string, syncId: string) => {
-    const newWS: Workspace = { id: crypto.randomUUID(), name, syncId: syncId.trim() };
+    const id = createId();
+    const newWS: Workspace = { id, name, syncId: syncId.trim() };
     setWorkspaces(prev => [...prev, newWS]);
-    setActiveWorkspaceId(newWS.id);
+    setActiveWorkspaceId(id);
+    return id;
+  };
+
+  const updateActiveWorkspaceSyncId = (newId: string) => {
+    setWorkspaces(prev => prev.map(w =>
+      w.id === activeWorkspaceId ? { ...w, syncId: newId } : w
+    ));
   };
 
   const deleteWorkspace = (id: string) => {
@@ -119,6 +207,13 @@ const App: React.FC = () => {
           snippets={snippets}
           onAddSnippet={addSnippet}
           onDeleteSnippet={deleteSnippet}
+          onUpdateSnippetTitle={updateSnippetTitle}
+          syncStatus={syncStatus}
+          syncError={syncError}
+          lastSyncAt={lastSyncAt}
+          lastSyncCount={lastSyncCount}
+          onManualSync={manualSync}
+          onUpdateSyncId={updateActiveWorkspaceSyncId}
           workspaces={workspaces}
           activeWorkspaceId={activeWorkspaceId}
           onSwitchWorkspace={setActiveWorkspaceId}
@@ -144,6 +239,13 @@ const App: React.FC = () => {
         snippets={snippets}
         onAddSnippet={addSnippet}
         onDeleteSnippet={deleteSnippet}
+        onUpdateSnippetTitle={updateSnippetTitle}
+        syncStatus={syncStatus}
+        syncError={syncError}
+        lastSyncAt={lastSyncAt}
+        lastSyncCount={lastSyncCount}
+        onManualSync={manualSync}
+        onUpdateSyncId={updateActiveWorkspaceSyncId}
         workspaces={workspaces}
         activeWorkspaceId={activeWorkspaceId}
         onSwitchWorkspace={setActiveWorkspaceId}

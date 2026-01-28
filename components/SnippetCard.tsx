@@ -6,6 +6,7 @@ interface SnippetCardProps {
   snippet: Snippet;
   onDelete: (id: string) => void;
   onCopy: (content: string) => void;
+  onUpdateTitle: (id: string, title: string) => void;
 }
 
 /**
@@ -13,9 +14,16 @@ interface SnippetCardProps {
  * 用於顯示單則筆記內容。根據內容類型 (文字、網址、圖片、影片) 顯示不同的預覽，
  * 並提供下載、複製與刪除功能。
  */
-const SnippetCard: React.FC<SnippetCardProps> = ({ snippet, onDelete, onCopy }) => {
+const SnippetCard: React.FC<SnippetCardProps> = ({ snippet, onDelete, onCopy, onUpdateTitle }) => {
+  const [isEditingTitle, setIsEditingTitle] = React.useState(false);
+  const [titleValue, setTitleValue] = React.useState(snippet.title || '');
+
+  React.useEffect(() => {
+    setTitleValue(snippet.title || '');
+  }, [snippet.title]);
   const isUrl = snippet.type === 'url' || (snippet.type === 'video' && !snippet.content.startsWith('data:'));
   const isDataFile = snippet.content.startsWith('data:');
+  const canDownload = snippet.type === 'video' || snippet.type === 'file';
 
   const typeLabels: Record<string, string> = {
     'url': '網址',
@@ -91,7 +99,7 @@ const SnippetCard: React.FC<SnippetCardProps> = ({ snippet, onDelete, onCopy }) 
           {typeLabels[snippet.type] || snippet.type}
         </span>
         <div className="flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
-          {(isDataFile || isUrl) && (
+          {canDownload && (isDataFile || isUrl) && (
             <button onClick={handleDownload} className="p-1 hover:bg-emerald-50 rounded text-emerald-500" title="下載檔案">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
             </button>
@@ -105,7 +113,49 @@ const SnippetCard: React.FC<SnippetCardProps> = ({ snippet, onDelete, onCopy }) 
         </div>
       </div>
 
-      {snippet.title && <h3 className="text-sm font-semibold text-slate-800 mb-1 leading-tight line-clamp-2">{snippet.title}</h3>}
+      {isEditingTitle ? (
+        <input
+          value={titleValue}
+          onChange={(e) => setTitleValue(e.target.value)}
+          onBlur={() => {
+            const nextTitle = titleValue.trim() || snippet.title || '';
+            setTitleValue(nextTitle);
+            onUpdateTitle(snippet.id, nextTitle);
+            setIsEditingTitle(false);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              (e.currentTarget as HTMLInputElement).blur();
+            }
+            if (e.key === 'Escape') {
+              setTitleValue(snippet.title || '');
+              setIsEditingTitle(false);
+            }
+          }}
+          className="w-full text-sm font-semibold text-slate-800 mb-1 leading-tight bg-transparent focus:outline-none border-b border-emerald-300"
+          placeholder="輸入標題"
+          autoFocus
+        />
+      ) : (
+        <div className="flex items-start justify-between gap-2 mb-1">
+          <h3
+            className="text-sm font-semibold text-slate-800 leading-tight line-clamp-2 cursor-text"
+            onClick={() => setIsEditingTitle(true)}
+          >
+            {snippet.title || '新文字筆記'}
+          </h3>
+          <button
+            type="button"
+            className="p-1 text-slate-400 hover:text-emerald-600"
+            onClick={() => setIsEditingTitle(true)}
+            title="編輯標題"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.862 3.487a2.1 2.1 0 112.97 2.97L7.5 18.79 3 21l2.21-4.5L16.862 3.487z" />
+            </svg>
+          </button>
+        </div>
+      )}
 
       {snippet.type === 'image' ? (
         <div className="mt-2 rounded-lg overflow-hidden bg-slate-100 aspect-video">
