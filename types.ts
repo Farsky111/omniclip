@@ -1,5 +1,5 @@
 
-export type ContentType = 'text' | 'url' | 'image' | 'video';
+export type ContentType = 'text' | 'url' | 'image' | 'video' | 'file';
 
 export interface Workspace {
   id: string;

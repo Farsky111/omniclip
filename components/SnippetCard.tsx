@@ -21,7 +21,8 @@ const SnippetCard: React.FC<SnippetCardProps> = ({ snippet, onDelete, onCopy }) 
     'url': '網址',
     'image': '圖片',
     'text': '文字',
-    'video': '影片'
+    'video': '影片',
+    'file': '檔案'
   };
 
   /**
@@ -33,8 +34,9 @@ const SnippetCard: React.FC<SnippetCardProps> = ({ snippet, onDelete, onCopy }) 
 
     const link = document.createElement('a');
     link.href = snippet.content;
-    const extension = snippet.type === 'image' ? 'png' : (snippet.type === 'video' ? 'mp4' : 'txt');
-    link.download = `OmniClip_${snippet.id.substring(0, 5)}.${extension}`;
+    const extension = snippet.type === 'image' ? 'png' : (snippet.type === 'video' ? 'mp4' : (snippet.type === 'file' ? 'bin' : 'txt'));
+    const fallbackName = `OmniClip_${snippet.id.substring(0, 5)}.${extension}`;
+    link.download = snippet.type === 'file' ? (snippet.title || fallbackName) : fallbackName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -111,6 +113,14 @@ const SnippetCard: React.FC<SnippetCardProps> = ({ snippet, onDelete, onCopy }) 
         </div>
       ) : snippet.type === 'video' ? (
         renderVideo(snippet.content)
+      ) : snippet.type === 'file' ? (
+        <div className="mt-2 rounded-lg border border-slate-200 bg-slate-50 p-3 flex items-center justify-between">
+          <div className="flex items-center gap-2 text-slate-600">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 3v4a1 1 0 001 1h4M5 21h14a2 2 0 002-2V7.5L14.5 3H5a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+            <span className="text-xs font-medium">{snippet.title || '檔案'}</span>
+          </div>
+          <button onClick={handleDownload} className="text-xs text-emerald-600 font-semibold">下載</button>
+        </div>
       ) : (
         <p className={`text-xs text-slate-600 mb-2 leading-relaxed ${isUrl ? 'break-all line-clamp-1 italic text-blue-500 underline' : 'line-clamp-4'}`}>
           {isUrl ? <a href={snippet.content} target="_blank" rel="noopener noreferrer">{snippet.content}</a> : snippet.content}

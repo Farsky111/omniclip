@@ -94,14 +94,8 @@ const App: React.FC = () => {
     setSnippets(prev => prev.filter(s => s.id !== id));
   };
 
-  const updateActiveWorkspaceSyncId = (newId: string) => {
-    setWorkspaces(prev => prev.map(w =>
-      w.id === activeWorkspaceId ? { ...w, syncId: newId } : w
-    ));
-  };
-
-  const addWorkspace = (name: string) => {
-    const newWS: Workspace = { id: crypto.randomUUID(), name, syncId: '' };
+  const addWorkspace = (name: string, syncId: string) => {
+    const newWS: Workspace = { id: crypto.randomUUID(), name, syncId: syncId.trim() };
     setWorkspaces(prev => [...prev, newWS]);
     setActiveWorkspaceId(newWS.id);
   };
@@ -114,10 +108,6 @@ const App: React.FC = () => {
       setActiveWorkspaceId(newWorkspaces[0].id);
     }
     // 注意：這裡沒刪除 IndexedDB 資料庫，僅移除列表索引
-  };
-
-  const syncFromCloud = (newSnippets: Snippet[]) => {
-    setSnippets(newSnippets);
   };
 
   if (isMiniMode) {
@@ -134,8 +124,6 @@ const App: React.FC = () => {
           onSwitchWorkspace={setActiveWorkspaceId}
           onAddWorkspace={addWorkspace}
           onDeleteWorkspace={deleteWorkspace}
-          onUpdateSyncId={updateActiveWorkspaceSyncId}
-          onSyncFromCloud={syncFromCloud}
         />
       </div>
     );
@@ -161,8 +149,6 @@ const App: React.FC = () => {
         onSwitchWorkspace={setActiveWorkspaceId}
         onAddWorkspace={addWorkspace}
         onDeleteWorkspace={deleteWorkspace}
-        onUpdateSyncId={updateActiveWorkspaceSyncId}
-        onSyncFromCloud={syncFromCloud}
       />
     </div>
   );
